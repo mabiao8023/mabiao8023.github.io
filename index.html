@@ -147,6 +147,292 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-promise入门到入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/28/promise入门到入门/">promise入门到入门</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/28/promise入门到入门/" class="archive-article-date">
+  	<time datetime="2017-11-28T03:42:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Promise从入门到入门"><a href="#Promise从入门到入门" class="headerlink" title="Promise从入门到入门"></a>Promise从入门到入门</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>在了解promise前先来了解一下javascript的几个核心概念。</p>
+</blockquote>
+<ul>
+<li><p>执行环境<strong>单线程</strong></p>
+<p>js的执行环境属于单线程，HTML5提出Web Worker标准，允许创建多个线程，但是子线程完全受主线程控制，且不得操作DOM，只是用来操作逻辑复杂和执行时间较长的代码。所以，这个新标准并没有改变单线程的本质。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>回调队列</strong>  与  <strong>回调函数</strong></li>
+</ul>
+<p>单线程的缺点，在执行时间长的代码块时，页面失去响应，造成页面假死，用户体验极差。</p>
+<p>为了改进这种体验，js将执行的任务划分为两种：</p>
+<ol>
+<li><p>一种是同步任务（synchronous）</p>
+</li>
+<li><p>一种是异步任务（asynchronous）</p>
+</li>
+</ol>
+<blockquote>
+<p>异步任务？异步任务有哪几种呢？</p>
+</blockquote>
+<ol>
+<li>DOM事件任务(onclick)</li>
+<li>定时器事件任务(setTimeout/setInteval);</li>
+<li>XMLHttpRequest事件任务（ajax）;</li>
+</ol>
+<blockquote>
+<p>异步任务有什么特点呢？？</p>
+</blockquote>
+<ol>
+<li>异步任务都是通过异步<strong>回调函数</strong>完成；</li>
+<li>异步任务不进入主线程而进入一个叫<strong>回调队列</strong>的东西；</li>
+<li>异步任务等主线程空闲时才去执行回调队列中的异步回调函数；</li>
+</ol>
+<p>简单的看图来解释一下上面这些的相互关系:</p>
+<p><img src="https://mabiao8023.github.io/web-flex/htdl.png" alt="image"></p>
+<ul>
+<li><strong>event loop(事件循环)</strong>：</li>
+</ul>
+<p>js会创建一个类似于while(ture)的循环，每次循环就是查看是否有待处理的事件，有则取出相关事件及回调函数放入到回调队列中由主线程执行，待处理的事件会存储在一个回调队列中。</p>
+<ul>
+<li><strong>callback quene(回调队列)</strong>：</li>
+</ul>
+<p>异步任务会将相关回调函数添加到回调队列中。而不同的异步任务添加到回调队列的时机也不同，这些异步任务是由浏览器内核的 webcore 来执行的，webcore 包含3种 webAPI，分别是 DOM Binding、network、timer模块。</p>
+<ol>
+<li>DOM事件(onclick)由DOM Binding 模块来处理，当事件触发的时候，回调函数会立即添加到回调队列中；</li>
+<li>定时器事件(setTimeout) 由timer 模块来进行延时处理，当时间到达的时候，才会将回调函数添加到回调队列中；</li>
+<li>XHR(ajax)由network 模块来处理，在网络请求完成返回之后，才将回调函数添加到回调队列中；</li>
+</ol>
+<ul>
+<li><strong>前言小结</strong></li>
+</ul>
+<p>js中一切的异步任务都是要用 <strong>回调函数</strong> 实现的。<br>讲了这么多的概念我们来看一个经典的案例，通过这个案例来感受一下js的进步。</p>
+<p>题目：三秒后红灯亮一次，再过一秒后绿灯亮一次，再过2后黄灯亮一次；如何让三个灯不断交替亮？</p>
+<p>假设在不知道promise的情况下，我们可以这样实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let red = () =&gt; console.log(&apos;red&apos;);</div><div class="line">let green = () =&gt; console.log(&apos;green&apos;);</div><div class="line">let yellow = () =&gt; console.log(&apos;yellow&apos;);</div><div class="line"></div><div class="line">let light = () =&gt; &#123;</div><div class="line">    setTimeout(() =&gt; &#123;</div><div class="line">        // 红灯亮</div><div class="line">        red();</div><div class="line">        setTimeout( () =&gt; &#123;</div><div class="line">            // 绿灯亮</div><div class="line">            green();</div><div class="line">            setTimeout(() =&gt; &#123;</div><div class="line">                // 黄灯亮</div><div class="line">                yellow();</div><div class="line">                // 继续循环亮灯</div><div class="line">                light();</div><div class="line">            &#125;,1000)</div><div class="line">        &#125;,2000)</div><div class="line">    &#125;,3000);        </div><div class="line">&#125;</div><div class="line">// 走起</div><div class="line">light();</div></pre></td></tr></table></figure>
+<p><a href="https://codepen.io/mbiao/pen/EbeYYE" target="_blank" rel="external">看看效果</a></p>
+<blockquote>
+<p>虽然效果实现了，但是代码不是很优雅，下面来一步一步优化它</p>
+</blockquote>
+<h2 id="1、初探Promise的概念"><a href="#1、初探Promise的概念" class="headerlink" title="1、初探Promise的概念"></a>1、初探Promise的概念</h2><ul>
+<li>promise单词的含义：</li>
+</ul>
+<blockquote>
+<p>承诺在将来一定发生的事情。</p>
+</blockquote>
+<ul>
+<li><a href="http://malcolmyu.github.io/malnote/2015/06/12/Promises-A-Plus/" target="_blank" rel="external">promise/A+规范：</a></li>
+</ul>
+<blockquote>
+<p>一个开放、健全且通用的 JavaScript Promise 标准。由开发者制定，供开发者参考。</p>
+</blockquote>
+<p>你也可以自己实现一个promise，但是规范规定它必须是一个拥有 then 方法的对象或函数，其行为符合以下规范；</p>
+<ul>
+<li>规范摘要：</li>
+</ul>
+<p>Promise对象有<strong>三种状态</strong>：</p>
+<ol>
+<li>等待态（Pending）</li>
+<li>执行态（Fulfilled）</li>
+<li>拒绝态（Rejected）</li>
+</ol>
+<p>promise状态可转变，一旦转变状态不再变化，状态转变只有两种：</p>
+<ol>
+<li>“Pending”状态转到“Fulfilled”</li>
+<li>“Pending”状态转到“rejected”</li>
+</ol>
+<ul>
+<li><strong>then方法:</strong></li>
+</ul>
+<blockquote>
+<p>一个promise对象必须提供一个then方法，状态发生改变后调用该方法。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// @params onFulfilled（执行状态的回调），onRejected（拒绝状态的回调）</div><div class="line"></div><div class="line">// @return promise对象</div><div class="line"></div><div class="line">promise.then(onFulfilled, onRejected)</div></pre></td></tr></table></figure>
+<p>上面理论有点抽象，来个图看看：<br><img src="https://mabiao8023.github.io/web-flex/promise2.png" alt="image"></p>
+<p>针对以上promise的规范，jQuery等流行的js库参考规范都已经实现了这个对象,es6也实现了这个对象,下面来具体来看看怎么实现的？</p>
+<h2 id="2、es6中的promise"><a href="#2、es6中的promise" class="headerlink" title="2、es6中的promise"></a>2、es6中的promise</h2><p>ES6正式提出把Promise作为原生对象，原理实现以promise规范为主。</p>
+<p>ES6 Promise 先拉出来遛遛 ，新版浏览器中打印一下，es6中利用构造函数实现了promise：<br><img src="https://mabiao8023.github.io/web-flex/promise.png" alt="image"></p>
+<ul>
+<li><strong>基本用法(new , then , resolve , reject)</strong></li>
+</ul>
+<p>ES6规定，Promise对象是一个构造函数，用来生成Promise实例。</p>
+<p>下面代码创造了一个Promise实例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">function getNumber()&#123;</div><div class="line">    //实例化一个promise实例，构造函数接受一个函数作为参数</div><div class="line">    var p = new Promise(function(resolve, reject)&#123;</div><div class="line">        //做一些异步操作</div><div class="line">        setTimeout(function()&#123;</div><div class="line">            var num = Math.ceil(Math.random()*10); //生成1-10的随机数</div><div class="line">            if(num&lt;=5)&#123;</div><div class="line">                resolve(num);</div><div class="line">            &#125;</div><div class="line">            else&#123;</div><div class="line">                reject(&apos;数字太大了&apos;);</div><div class="line">            &#125;</div><div class="line">        &#125;, 2000);</div><div class="line">    &#125;);</div><div class="line">    </div><div class="line">    //返回promise对象</div><div class="line">    return p;            </div><div class="line">&#125;</div><div class="line"> </div><div class="line">getNumber()</div><div class="line">.then(</div><div class="line">    //已完成后的回调</div><div class="line">    function(data)&#123;</div><div class="line">        console.log(&apos;resolved&apos;);</div><div class="line">        console.log(data);</div><div class="line">    &#125;, </div><div class="line">    //已失败后的回调</div><div class="line">    function(reason, data)&#123;</div><div class="line">        console.log(&apos;rejected&apos;);</div><div class="line">        console.log(reason);</div><div class="line">    &#125;</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>getNumber函数用来异步获取一个数字，2秒后执行完成，如果数字小于等于5，我们认为是“成功”了，调用resolve修改Promise的状态。否则我们认为是“失败”了，调用reject并传递一个参数，作为失败的原因。</p>
+<p>then方法可以接受两个参数，第一个对应resolve的回调，第二个对应reject的回调，如果只有一个则是resolve的回调。</p>
+<p>运行结果：resolved 2 或者 rejected 数字太大了</p>
+<ul>
+<li><strong>catch用法</strong><br>它和then的第二个参数一样，用来指定reject的回调，用法是这样：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">getNumber()</div><div class="line">.then(function(data)&#123;</div><div class="line">    console.log(&apos;resolved&apos;);</div><div class="line">    console.log(data);</div><div class="line">&#125;)</div><div class="line">.catch(function(reason)&#123;</div><div class="line">    console.log(&apos;rejected&apos;);</div><div class="line">    console.log(reason);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>不过它还有另外一个作用：在执行resolve的回调（也就是上面then中的第一个参数）时，如果抛出异常了（代码出错了），那么并不会报错卡死js，而是会进到这个catch方法中。请看下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">getNumber()</div><div class="line">.then(function(data)&#123;</div><div class="line">    console.log(&apos;resolved&apos;);</div><div class="line">    console.log(data);</div><div class="line">    console.log(somedata); //此处的somedata未定义</div><div class="line">&#125;)</div><div class="line">.catch(function(reason)&#123;</div><div class="line">    console.log(&apos;rejected&apos;);</div><div class="line">    console.log(reason);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//运行结果</div><div class="line">//resolved</div><div class="line">//4 </div><div class="line">//rejected</div><div class="line">//ReferenceError: somedata is no defind(....)</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>all用法</strong><br>Promise的all方法提供了并行执行异步操作的能力，并且在所有异步操作执行完后才执行回调。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Promise</div><div class="line">.all([runAsync1(), runAsync2(), runAsync3()])</div><div class="line">.then(function(results)&#123;</div><div class="line">    console.log(results);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>all接收一个promise对象的数组参数。三个异步操作是并行执行的，等到它们都执行完后才会进到then里面。那么，三个异步操作返回的数据哪里去了呢？都在then里面呢，all会把所有异步操作的结果放进一个数组中传给then，就是上面的results。</p>
+<ul>
+<li><strong>race的用法</strong></li>
+</ul>
+<p>all方法实际上是「谁跑的慢，以谁为准执行回调」<br>race方法「谁跑的快，以谁为准执行回调」</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Promise</div><div class="line">.race([runAsync1(), runAsync2(), runAsync3()])</div><div class="line">.then(function(results)&#123;</div><div class="line">    console.log(results);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>多级链式调用</strong></li>
+</ul>
+<p>then方法返回一个promise对象，另外，在 then 的函数当中的返回值，可以作为后续操作的参数，因此上面的例子也可以写成,可以多级链式调用，按照回调的先后顺序依次执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Promise.then(function (message) &#123;</div><div class="line">    return message;</div><div class="line">&#125;).then(function (message) &#123;</div><div class="line">    return message  + &apos; World&apos;;</div><div class="line">&#125;).then(function (message) &#123;</div><div class="line">    return message + &apos;!&apos;;</div><div class="line">&#125;).then(function (message) &#123;</div><div class="line">    alert(message);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>小结</li>
+</ul>
+<blockquote>
+<p>使用es6中的promise来改写前言中提出的亮灯的问题</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">let red = () =&gt; console.log(&apos;red&apos;);</div><div class="line">let green = () =&gt; console.log(&apos;green&apos;);</div><div class="line">let yellow = () =&gt; console.log(&apos;yellow&apos;);</div><div class="line"></div><div class="line">// 使用promise封装灯亮的异步定时函数</div><div class="line">let lightPro = (callback,time) =&gt; &#123;</div><div class="line">    // 实例化promise对象</div><div class="line">    return new Promise((resolve,reject) =&gt; &#123;</div><div class="line">        setTimeout(() =&gt; &#123;</div><div class="line">            callback();</div><div class="line">            // 异步成功调用</div><div class="line">            resolve();</div><div class="line">        &#125;,time)</div><div class="line">    &#125;)</div><div class="line">&#125;；</div><div class="line">   </div><div class="line">let light = () =&gt; &#123;</div><div class="line">    lightPro(red,3000)</div><div class="line">        .then( _ =&gt;  lightPro(green,2000) )</div><div class="line">        .then( _ =&gt;  lightPro(yellow,1000))</div><div class="line">        .then( _ =&gt; light());</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 走起</div><div class="line">light();</div></pre></td></tr></table></figure>
+<p>很明显，效果实现是一样的，但是在代码层次方面，优雅了不少，多级回调被串联的方式取代，越复杂的回调越被改进的优雅。</p>
+<h2 id="3、es6中-Generator-函数的异步应用参考"><a href="#3、es6中-Generator-函数的异步应用参考" class="headerlink" title="3、es6中 Generator 函数的异步应用参考"></a>3、es6中 Generator 函数的异步应用参考</h2><p>上一节中es6中实现的promise对象其实有很多其他的库都实现了类似的功能，与其他库（O.js,bluebird.js等）相比优势并不明显。</p>
+<p>Promise 的最大问题是代码冗余，原来的任务被 Promise 包装了一下，不管什么操作，一眼看去都是一堆then，原来的语义变得很不清楚。</p>
+<p>那么，有没有更好的写法呢？</p>
+<p>答案肯定是有的，es6中的Generator 函数将 JavaScript 异步编程带入了一个全新的阶段。</p>
+<ul>
+<li><strong>协程</strong></li>
+</ul>
+<p>传统的编程语言，早有异步编程的解决方案（其实是多任务的解决方案）。其中有一种叫做”协程”（coroutine），意思是多个线程互相协作，完成异步任务。</p>
+<p>协程有点像函数，又有点像线程。它的运行流程大致如下。</p>
+<ol>
+<li>第一步，协程A开始执行。</li>
+<li>第二步，协程A执行到一半，进入暂停，执行权转移到协程B。</li>
+<li>第三步，（一段时间后）协程B交还执行权。</li>
+<li>第四步，协程A恢复执行。</li>
+</ol>
+<p>上面流程的协程A，就是异步任务，因为它分成两段（或多段）执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 读文件的列子</div><div class="line">function* asyncJob() &#123;</div><div class="line">  // ...其他代码</div><div class="line">  var f = yield readFile(fileA);</div><div class="line">  // ...其他代码</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面代码的函数asyncJob是一个协程，它的奥妙就在其中的yield命令。它表示执行到此处，执行权将交给其他协程。也就是说，yield命令是异步两个阶段的分界线。</p>
+<p>协程遇到yield命令就暂停，等到执行权返回，再从暂停的地方继续往后执行。它的最大优点，就是代码的写法非常像同步操作，如果去除yield命令，简直一模一样。</p>
+<ul>
+<li><strong>协程的 Generator 函数实现与应用</strong> </li>
+</ul>
+<p>Generator 函数是协程在 ES6 的实现，最大特点就是可以交出函数的执行权（即暂停执行）。</p>
+<p>整个 Generator 函数就是一个封装的异步任务，或者说是异步任务的容器。异步操作需要暂停的地方，都用yield语句注明。Generator 函数的执行方法如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">let red = () =&gt; console.log(&apos;red&apos;);</div><div class="line">let green = () =&gt; console.log(&apos;green&apos;);</div><div class="line">let yellow = () =&gt; console.log(&apos;yellow&apos;);</div><div class="line"></div><div class="line">// 使用promise封装灯亮的异步定时函数</div><div class="line">let lightPro = (callback,time) =&gt; &#123;</div><div class="line">    // 实例化promise对象</div><div class="line">    return new Promise((resolve,reject) =&gt; &#123;</div><div class="line">        setTimeout(() =&gt; &#123;</div><div class="line">            callback();</div><div class="line">            // 异步成功调用</div><div class="line">            resolve();</div><div class="line">        &#125;,time)</div><div class="line">    &#125;)</div><div class="line">&#125;；</div><div class="line">   </div><div class="line">let light = function* () =&gt; &#123;</div><div class="line">    yield lightPro(red,3000);</div><div class="line">    yield lightPro(green,2000);</div><div class="line">    yield lightPro(yellow,1000);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 走起</div><div class="line">let lightheight = () =&gt; &#123;</div><div class="line">    let g = light();</div><div class="line">    g.next();   // &#123; value: undefined, done: false &#125;</div><div class="line">    g.next();   // &#123; value: undefined, done: false &#125;</div><div class="line">    g.next();  // &#123; value: undefined, done: true &#125;</div><div class="line">    lightheight();</div><div class="line">&#125;</div><div class="line"></div><div class="line">lightheight();</div></pre></td></tr></table></figure>
+<p>上面代码中，调用 Generator 函数，会返回一个内部指针（即遍历器）g。这是 Generator 函数不同于普通函数的另一个地方，即执行它不会返回结果，返回的是指针对象。调用指针g的next方法，会移动内部指针（即执行异步任务的第一段），指向第一个遇到的yield语句。</p>
+<p>换言之，next方法的作用是分阶段执行Generator函数。每次调用next方法，会返回一个对象，表示当前阶段的信息（value属性和done属性）。value属性是yield语句后面表达式的值，表示当前阶段的值；done属性是一个布尔值，表示 Generator 函数是否执行完毕，即是否还有下一个阶段。</p>
+<ul>
+<li>小结</li>
+</ul>
+<blockquote>
+<p>上述方法对promise的操作进行了简化，但是其异步操作完全是基于promise实现的异步操作。但是还是感觉有点复杂，不要怕，下面来还有更骚的操作。</p>
+</blockquote>
+<h2 id="4、ES2017-中的async骚操作"><a href="#4、ES2017-中的async骚操作" class="headerlink" title="4、ES2017 中的async骚操作"></a>4、ES2017 中的async骚操作</h2><ul>
+<li><strong>async 函数是什么？</strong></li>
+</ul>
+<blockquote>
+<p>它其实就是 Generator 函数的语法糖。目前promise的最优秀的解决方案。koa2已经全面使用该语法。</p>
+</blockquote>
+<p>用async改写红黄绿灯的案例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">let red = () =&gt; console.log(&apos;red&apos;);</div><div class="line">let green = () =&gt; console.log(&apos;green&apos;);</div><div class="line">let yellow = () =&gt; console.log(&apos;yellow&apos;);</div><div class="line"></div><div class="line">// 使用promise封装灯亮的异步定时函数</div><div class="line">let lightPro = (callback,time) =&gt; &#123;</div><div class="line">    // 实例化promise对象</div><div class="line">    return new Promise((resolve,reject) =&gt; &#123;</div><div class="line">        setTimeout(() =&gt; &#123;</div><div class="line">            callback();</div><div class="line">            // 异步成功调用</div><div class="line">            resolve();</div><div class="line">        &#125;,time)</div><div class="line">    &#125;)</div><div class="line">&#125;；</div><div class="line"></div><div class="line">// 走你</div><div class="line">let light = async function() =&gt; &#123;</div><div class="line">    await lightPro(red,3000);</div><div class="line">    await lightPro(green,2000);</div><div class="line">    await lightPro(yellow,1000);</div><div class="line">    light();</div><div class="line">&#125;</div><div class="line">light();</div></pre></td></tr></table></figure>
+<p>一比较就会发现，async函数就是将 Generator 函数的星号（*）替换成async，将yield替换成await，仅此而已。</p>
+<blockquote>
+<p>发现没有Generator中异步操作执行的时机需要调用g.next(),需要自主控制时机执行，<br>但是async就不一样了，在调用async函数时，内部的异步操作会按照预先设计好的顺序执行，不用再麻烦的调用g.next()的方法了。</p>
+</blockquote>
+<ul>
+<li>async函数对 Generator 函数的改进点</li>
+</ul>
+<p>1.内置执行器，也就是上面提到的Generator 函数的执行必须靠执行器，而async函数自带执行器。也就是说，async函数的执行，与普通函数一模一样，只要一行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// Generator</div><div class="line">let lightheight = () =&gt; &#123;</div><div class="line">    let g = light();</div><div class="line">    g.next();   // &#123; value: undefined, done: false &#125;</div><div class="line">    g.next();   // &#123; value: undefined, done: false &#125;</div><div class="line">    g.next();  // &#123; value: undefined, done: true &#125;</div><div class="line">    lightheight();</div><div class="line">&#125;</div><div class="line">lightheight();</div><div class="line"></div><div class="line">// async只要一行搞定</div><div class="line">light();</div></pre></td></tr></table></figure>
+<ol>
+<li>更好的语义，async（异步）和await（等待），比起星号和yield，语义更清楚了。</li>
+<li>更广的适用性，yield命令后面只能是 Thunk 函数或 Promise 对象，而async函数的await命令后面，可以是 Promise 对象和原始类型的值（数值、字符串和布尔值，但这时等同于同步操作）。</li>
+<li>返回值是 Promise，async函数的返回值是 Promise 对象，这比 Generator 函数的返回值是 Iterator 对象方便多了。你可以用then方法指定下一步的操作。</li>
+</ol>
+<blockquote>
+<p>进一步说，async函数完全可以看作多个异步操作，包装成的一个 Promise 对象，而await命令就是内部then命令的语法糖。</p>
+</blockquote>
+<ul>
+<li><strong>基本用法</strong></li>
+</ul>
+<p>底层使用到的异步封装也是基于promise实现的。具体的使用方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">// 函数声明</div><div class="line">async function foo() &#123;&#125;</div><div class="line"></div><div class="line">// 函数表达式</div><div class="line">const foo = async function () &#123;&#125;;</div><div class="line"></div><div class="line">// 对象的方法</div><div class="line">let obj = &#123; async foo() &#123;&#125; &#125;;</div><div class="line">obj.foo().then(...)</div><div class="line"></div><div class="line">// Class 的方法</div><div class="line">class Storage &#123;</div><div class="line">  constructor() &#123;</div><div class="line">    this.cachePromise = caches.open(&apos;avatars&apos;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  async getAvatar(name) &#123;</div><div class="line">    const cache = await this.cachePromise;</div><div class="line">    return cache.match(`/avatars/$&#123;name&#125;.jpg`);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const storage = new Storage();</div><div class="line">storage.getAvatar(&apos;jake&apos;).then(…);</div><div class="line"></div><div class="line">// 箭头函数</div><div class="line">const foo = async () =&gt; &#123;&#125;;</div></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>错误处理机制</strong></li>
+</ul>
+<blockquote>
+<p> async函数的语法规则总体上比较简单，难点是错误处理机制。</p>
+</blockquote>
+<p>async函数内部抛出错误，会导致返回的 Promise 对象变为reject状态。抛出的错误对象会被catch方法回调函数接收到。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">async function f() &#123;</div><div class="line">  await Promise.reject(&apos;出错了&apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">f().then(v =&gt; console.log(v))</div><div class="line">    .catch( e =&gt; console.log(e))</div><div class="line">// Error: 出错了</div></pre></td></tr></table></figure></p>
+<p>只要一个await语句后面的 Promise 变为reject，那么整个async函数都会中断执行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">async function f() &#123;</div><div class="line">  await Promise.reject(&apos;出错了&apos;);</div><div class="line">  await Promise.resolve(&apos;hello world&apos;); // 不会执行</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面代码中，第二个await语句是不会执行的，因为第一个await语句状态变成了reject。<br>有时，我们希望即使前一个异步操作失败，也不要中断后面的异步操作。这时可以将第一个await放在try…catch结构里面，这样不管这个异步操作是否成功，第二个await都会执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">async function f() &#123;</div><div class="line">  try &#123;</div><div class="line">    await Promise.reject(&apos;出错了&apos;);</div><div class="line">  &#125; catch(e) &#123;</div><div class="line">  &#125;</div><div class="line">  return await Promise.resolve(&apos;hello world&apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">f()</div><div class="line">.then(v =&gt; console.log(v))</div><div class="line">// hello world</div><div class="line"></div><div class="line">// 也可以这样的promise后面跟catch捕获前一个promise的错误</div><div class="line">async function f() &#123;</div><div class="line">  await Promise.reject(&apos;出错了&apos;)</div><div class="line">    .catch(e =&gt; console.log(e));</div><div class="line">  return await Promise.resolve(&apos;hello world&apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">f()</div><div class="line">.then(v =&gt; console.log(v))</div><div class="line">// 出错了</div><div class="line">// hello world</div></pre></td></tr></table></figure>
+<p>所以防止出错的方法，也是将其放在try…catch代码块之中。如果有多个await命令，可以统一放在try…catch结构中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">async function main() &#123;</div><div class="line">  try &#123;</div><div class="line">    const val1 = await firstStep();</div><div class="line">    const val2 = await secondStep(val1);</div><div class="line">    const val3 = await thirdStep(val1, val2);</div><div class="line"></div><div class="line">    console.log(&apos;Final: &apos;, val3);</div><div class="line">  &#125;</div><div class="line">  catch (err) &#123;</div><div class="line">    console.error(err);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>使用async的注意点</li>
+</ul>
+<ol>
+<li>错误处理，用try…catch捕获</li>
+<li><p>多个await命令后面的异步操作，如果不存在继发关系，最好让它们同时触发。其实就是并发，减少等待时间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 这样getBar的执行必须要等到getFoo执行完成后才去执行</div><div class="line">let foo = await getFoo();</div><div class="line">let bar = await getBar();</div><div class="line"></div><div class="line">// 其实这两函数并没有依赖关系，等着只能浪费时间，可以采用如下的写法</div><div class="line">// 写法一</div><div class="line">let [foo, bar] = await Promise.all([getFoo(), getBar()]);</div><div class="line"></div><div class="line">// 写法二</div><div class="line">let fooPromise = getFoo();</div><div class="line">let barPromise = getBar();</div><div class="line">let foo = await fooPromise;</div><div class="line">let bar = await barPromise;</div></pre></td></tr></table></figure>
+<p>3.await和async必须成对出现，await不能用在forEach循环中，偶尔会出错，要使用最好使用for循环代替，<strong>forEach的坑我真的踩过</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">// bad</div><div class="line">function dbFuc(db) &#123; //这里不需要 async</div><div class="line">  let docs = [&#123;&#125;, &#123;&#125;, &#123;&#125;];</div><div class="line"></div><div class="line">  // 可能得到错误结果</div><div class="line">  docs.forEach(async function (doc) &#123;</div><div class="line">    await db.post(doc);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// best</div><div class="line"></div><div class="line">async function dbFuc(db) &#123;</div><div class="line">  let docs = [&#123;&#125;, &#123;&#125;, &#123;&#125;];</div><div class="line"></div><div class="line">  for (let doc of docs) &#123;</div><div class="line">    await db.post(doc);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="5、最后"><a href="#5、最后" class="headerlink" title="5、最后"></a>5、最后</h2><p>通过以上几点，我们大概了解了关于promise的整个发展过程，语法再不断的升级，使我们写的代码越来越优雅，估计在不久的将来还会有更厉害更简洁的语法出现，但是这些语法的基础都是基于promise实现的异步处理实现的，所以建议大家可以多多熟悉promise的规范，接下来会尝试写一关于promise具体实现的文章，帮助自己及大家更深入的了解promise。文章中很多内容大多都是引用其他优秀的文章，其中也加了一些自己的理解，希望大家能多多提意见。</p>
+<p>参考链接：<br>1.<a href="http://malcolmyu.github.io/malnote/2015/06/12/Promises-A-Plus" target="_blank" rel="external">Promises/A+规范</a>;<br>2.<a href="http://es6.ruanyifeng.com/#docs/promise" target="_blank" rel="external">es6标准教程-promise-阮一峰</a>;<br>3.<a href="http://es6.ruanyifeng.com/#docs/generator-async" target="_blank" rel="external">es6标准教程-Generator 函数的异步应用-阮一峰</a>;<br>4.<a href="http://es6.ruanyifeng.com/#docs/async" target="_blank" rel="external">es6标准教程-async 函数-阮一峰</a>;</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/28/promise入门到入门/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-前端布局中的FC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

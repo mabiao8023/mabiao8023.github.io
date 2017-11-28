@@ -6,22 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>前端布局中的FC | Microbot Team - mbiao</title>
+  <title>promise入门到入门 | Microbot Team - mbiao</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="css布局中的FC  首先提出几个布局中常见的问题？？   子元素浮动导致父元素高度坍陷  如何实现两栏自适应布局  如何处理相邻两个box垂直外边距重叠   以上问题各位是如何解决？？为什么呢？ 1、BOX  CSS 布局的对象和基本单位。元素的类型和display属性，决定了这个 Box 的类型。不同类型的Box内的元素会以不同的方式渲染。  block-level box:display 属">
-<meta name="keywords" content="css,FC,BFC,IFC,FFC">
+  <meta name="description" content="Promise从入门到入门前言 在了解promise前先来了解一下javascript的几个核心概念。   执行环境单线程 js的执行环境属于单线程，HTML5提出Web Worker标准，允许创建多个线程，但是子线程完全受主线程控制，且不得操作DOM，只是用来操作逻辑复杂和执行时间较长的代码。所以，这个新标准并没有改变单线程的本质。     回调队列  与  回调函数  单线程的缺点，在执行时间">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端布局中的FC">
-<meta property="og:url" content="http://yoursite.com/2017/11/01/前端布局中的FC/index.html">
+<meta property="og:title" content="promise入门到入门">
+<meta property="og:url" content="http://yoursite.com/2017/11/28/promise入门到入门/index.html">
 <meta property="og:site_name" content="Microbot Team - mbiao">
-<meta property="og:description" content="css布局中的FC  首先提出几个布局中常见的问题？？   子元素浮动导致父元素高度坍陷  如何实现两栏自适应布局  如何处理相邻两个box垂直外边距重叠   以上问题各位是如何解决？？为什么呢？ 1、BOX  CSS 布局的对象和基本单位。元素的类型和display属性，决定了这个 Box 的类型。不同类型的Box内的元素会以不同的方式渲染。  block-level box:display 属">
-<meta property="og:image" content="https://mabiao8023.github.io/web-flex/float1.png">
-<meta property="og:image" content="https://mabiao8023.github.io/web-flex/float2.png">
-<meta property="og:updated_time" content="2017-11-01T04:59:29.878Z">
+<meta property="og:description" content="Promise从入门到入门前言 在了解promise前先来了解一下javascript的几个核心概念。   执行环境单线程 js的执行环境属于单线程，HTML5提出Web Worker标准，允许创建多个线程，但是子线程完全受主线程控制，且不得操作DOM，只是用来操作逻辑复杂和执行时间较长的代码。所以，这个新标准并没有改变单线程的本质。     回调队列  与  回调函数  单线程的缺点，在执行时间">
+<meta property="og:image" content="https://mabiao8023.github.io/web-flex/htdl.png">
+<meta property="og:image" content="https://mabiao8023.github.io/web-flex/promise2.png">
+<meta property="og:image" content="https://mabiao8023.github.io/web-flex/promise.png">
+<meta property="og:updated_time" content="2017-11-28T03:51:18.501Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="前端布局中的FC">
-<meta name="twitter:description" content="css布局中的FC  首先提出几个布局中常见的问题？？   子元素浮动导致父元素高度坍陷  如何实现两栏自适应布局  如何处理相邻两个box垂直外边距重叠   以上问题各位是如何解决？？为什么呢？ 1、BOX  CSS 布局的对象和基本单位。元素的类型和display属性，决定了这个 Box 的类型。不同类型的Box内的元素会以不同的方式渲染。  block-level box:display 属">
-<meta name="twitter:image" content="https://mabiao8023.github.io/web-flex/float1.png">
+<meta name="twitter:title" content="promise入门到入门">
+<meta name="twitter:description" content="Promise从入门到入门前言 在了解promise前先来了解一下javascript的几个核心概念。   执行环境单线程 js的执行环境属于单线程，HTML5提出Web Worker标准，允许创建多个线程，但是子线程完全受主线程控制，且不得操作DOM，只是用来操作逻辑复杂和执行时间较长的代码。所以，这个新标准并没有改变单线程的本质。     回调队列  与  回调函数  单线程的缺点，在执行时间">
+<meta name="twitter:image" content="https://mabiao8023.github.io/web-flex/htdl.png">
   
     <link rel="alternative" href="/atom.xml" title="Microbot Team - mbiao" type="application/atom+xml">
   
@@ -153,130 +153,250 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-前端布局中的FC" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-promise入门到入门" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      前端布局中的FC
+      promise入门到入门
     </h1>
   
 
         
-        <a href="/2017/11/01/前端布局中的FC/" class="archive-article-date">
-  	<time datetime="2017-11-01T04:53:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-01</time>
+        <a href="/2017/11/28/promise入门到入门/" class="archive-article-date">
+  	<time datetime="2017-11-28T03:42:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="css布局中的FC"><a href="#css布局中的FC" class="headerlink" title="css布局中的FC"></a>css布局中的FC</h1><hr>
-<blockquote>
-<p>首先提出几个布局中常见的问题？？</p>
+        <h1 id="Promise从入门到入门"><a href="#Promise从入门到入门" class="headerlink" title="Promise从入门到入门"></a>Promise从入门到入门</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>在了解promise前先来了解一下javascript的几个核心概念。</p>
 </blockquote>
 <ul>
-<li><p>子元素浮动导致父元素高度坍陷</p>
-</li>
-<li><p>如何实现两栏自适应布局</p>
-</li>
-<li><p>如何处理相邻两个box垂直外边距重叠</p>
-</li>
-</ul>
-<p>以上问题各位是如何解决？？为什么呢？</p>
-<h3 id="1、BOX"><a href="#1、BOX" class="headerlink" title="1、BOX"></a>1、BOX</h3><p>  CSS 布局的对象和基本单位。<strong>元素的类型和display属性</strong>，决定了这个 Box 的类型。不同类型的Box内的元素会以不同的方式渲染。</p>
-<ul>
-<li>block-level box:display 属性为 block, list-item, table 的元素。</li>
-<li>inline-level box:display 属性为 inline, inline-block, inline-table 的元素。</li>
-</ul>
-<h3 id="2、什么是FC-W3C-CSS2-1-规范中的一个概念"><a href="#2、什么是FC-W3C-CSS2-1-规范中的一个概念" class="headerlink" title="2、什么是FC(W3C CSS2.1 规范中的一个概念)"></a>2、什么是FC(W3C CSS2.1 规范中的一个概念)</h3><p>Formatting context ，页面中的一块渲染区域，并且有一套<strong>渲染规则</strong>，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用。</p>
-<p><strong>CSS2.1 中只有 BFC 和 IFC, CSS3 中还增加了 GFC 和 FFC。</strong></p>
-<h3 id="3、什么是BFC？"><a href="#3、什么是BFC？" class="headerlink" title="3、什么是BFC？"></a>3、什么是BFC？</h3><p>块级格式化上下文(Block formatting context),只有普通流中的Block-level box参与的一块渲染区域，它规定了内部的Block-level Box如何布局，并且与这个区域外部毫不相干。</p>
-<p><strong>注：而float、position值不为relative\static的元素是脱离普通文档流的，不参与BFC的布局。</strong></p>
-<h4 id="3-1-布局规则"><a href="#3-1-布局规则" class="headerlink" title="3.1 布局规则"></a>3.1 布局规则</h4><ul>
-<li>内部的Box会在垂直方向，一个接一个地放置。</li>
-</ul>
-<hr>
-<ul>
-<li>Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠。</li>
-</ul>
-<blockquote>
-<p>外边距重合的问题？</p>
-</blockquote>
-<hr>
-<ul>
-<li>每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。</li>
-</ul>
-<blockquote>
-<p>元素浮动，其他元素被重叠？</p>
-</blockquote>
-<hr>
-<ul>
-<li>BFC的区域不会与float box重叠。</li>
-</ul>
-<blockquote>
-<p>清除浮动<br>两栏自适应布局，左侧浮动，右侧生成bfc</p>
-</blockquote>
-<hr>
-<ul>
-<li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。</li>
-</ul>
-<hr>
-<ul>
-<li>计算BFC的高度时，浮动元素也参与计算。<blockquote>
-<p>清除浮动<br>子元素浮动父元素高度坍陷？</p>
-</blockquote>
+<li><p>执行环境<strong>单线程</strong></p>
+<p>js的执行环境属于单线程，HTML5提出Web Worker标准，允许创建多个线程，但是子线程完全受主线程控制，且不得操作DOM，只是用来操作逻辑复杂和执行时间较长的代码。所以，这个新标准并没有改变单线程的本质。</p>
 </li>
 </ul>
 <hr>
-<h4 id="3-1-这么厉害？怎么样才能成为BFC呢"><a href="#3-1-这么厉害？怎么样才能成为BFC呢" class="headerlink" title="3.1 这么厉害？怎么样才能成为BFC呢"></a>3.1 这么厉害？怎么样才能成为BFC呢</h4><ul>
-<li>根元素</li>
-<li>float不为none</li>
-<li>position不为relative和static</li>
-<li>display:inline-block, table-cell, table-caption, flex, inline-flex</li>
-<li>overflow不为visible</li>
-</ul>
-<h4 id="3-2举个栗子解读BFC"><a href="#3-2举个栗子解读BFC" class="headerlink" title="3.2举个栗子解读BFC"></a>3.2举个栗子解读BFC</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">    body &#123;</div><div class="line">        width: 300px;</div><div class="line">        position: relative;</div><div class="line">    &#125;</div><div class="line">    .aside &#123;</div><div class="line">        width: 100px;</div><div class="line">        height: 150px;</div><div class="line">        float: left;</div><div class="line">        background: #f66;</div><div class="line">    &#125;</div><div class="line">    .main &#123;</div><div class="line">        height: 200px;</div><div class="line">        background: #fcc;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;div class=&quot;aside&quot;&gt;&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;main&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
-<p><img src="https://mabiao8023.github.io/web-flex/float1.png" alt="image"></p>
-<p><strong>根据BFC布局规则</strong></p>
-<blockquote>
-<p>每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。</p>
-</blockquote>
-<p><strong>怎么实现左边固定右边自适应?</strong></p>
-<p><strong>根据BFC布局规则</strong></p>
-<blockquote>
-<p>BFC的区域不会与float box重叠。<br>让ian生成BFC？</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.main &#123;</div><div class="line">    overflow: hidden;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><img src="https://mabiao8023.github.io/web-flex/float2.png" alt="image"></p>
-<hr>
-<p><strong>如何选取方式生成BFC？</strong><br><strong>各生成BFC方式的总结</strong></p>
 <ul>
-<li>float:left 然而浮动元素有破坏性和包裹性，失去了元素本身的流体自适应性，因此，无法用来实现自动填满容器的自适应布局。</li>
-<li>position:absolute 这个脱离文档流有些严重，我就不说什么了……关于定位又是一个比较复杂的布局方式</li>
-<li>overflow:hidden 这个超棒的哦！不像浮动和绝对定位。也就是溢出剪裁什么的，本身还是个很普通的元素。</li>
-<li>display:inline-block 会让元素尺寸包裹收缩，完全就不是我们想要的block水平的流动特性。</li>
-<li>display:table-cell 让元素表现得像单元格一样，尺寸包裹收缩。</li>
+<li><strong>回调队列</strong>  与  <strong>回调函数</strong></li>
 </ul>
-<p><strong>自适应两栏布局有很多的其他方法</strong></p>
-<h3 id="4、IFC"><a href="#4、IFC" class="headerlink" title="4、IFC"></a>4、IFC</h3><p><strong>内联格式化上下文</strong></p>
-<ul>
-<li>1.IFC中的line box一般左右都贴紧整个IFC，但是会因为float元素而扰乱。float元素会位于IFC与与line box之间，使得line box宽度缩短。 </li>
-<li>2.水平居中：当一个块要在水平居中时，设置为inline-block则会在外层产生IFC，通过text-align可以水平居中。</li>
-<li>3.垂直居中：创建一个IFC，用其中一个元素撑开父元素的高度，然后设置其vertical-align:middle，其他行内元素则可以在此父元素下垂直居中。</li>
-</ul>
-<h3 id="5、FFC"><a href="#5、FFC" class="headerlink" title="5、FFC"></a>5、FFC</h3><p>(Flex Formatting Contexts)为”自适应格式化上下文”，</p>
-<ul>
-<li><p>display值为flex或者inline-flex的元素将生成ffc</p>
+<p>单线程的缺点，在执行时间长的代码块时，页面失去响应，造成页面假死，用户体验极差。</p>
+<p>为了改进这种体验，js将执行的任务划分为两种：</p>
+<ol>
+<li><p>一种是同步任务（synchronous）</p>
 </li>
-<li><p>display: flex 或 inline-flex得到一个伸缩容器。Flexbox 定义了伸缩容器内伸缩项目该如何布局。</p>
+<li><p>一种是异步任务（asynchronous）</p>
+</li>
+</ol>
+<blockquote>
+<p>异步任务？异步任务有哪几种呢？</p>
+</blockquote>
+<ol>
+<li>DOM事件任务(onclick)</li>
+<li>定时器事件任务(setTimeout/setInteval);</li>
+<li>XMLHttpRequest事件任务（ajax）;</li>
+</ol>
+<blockquote>
+<p>异步任务有什么特点呢？？</p>
+</blockquote>
+<ol>
+<li>异步任务都是通过异步<strong>回调函数</strong>完成；</li>
+<li>异步任务不进入主线程而进入一个叫<strong>回调队列</strong>的东西；</li>
+<li>异步任务等主线程空闲时才去执行回调队列中的异步回调函数；</li>
+</ol>
+<p>简单的看图来解释一下上面这些的相互关系:</p>
+<p><img src="https://mabiao8023.github.io/web-flex/htdl.png" alt="image"></p>
+<ul>
+<li><strong>event loop(事件循环)</strong>：</li>
+</ul>
+<p>js会创建一个类似于while(ture)的循环，每次循环就是查看是否有待处理的事件，有则取出相关事件及回调函数放入到回调队列中由主线程执行，待处理的事件会存储在一个回调队列中。</p>
+<ul>
+<li><strong>callback quene(回调队列)</strong>：</li>
+</ul>
+<p>异步任务会将相关回调函数添加到回调队列中。而不同的异步任务添加到回调队列的时机也不同，这些异步任务是由浏览器内核的 webcore 来执行的，webcore 包含3种 webAPI，分别是 DOM Binding、network、timer模块。</p>
+<ol>
+<li>DOM事件(onclick)由DOM Binding 模块来处理，当事件触发的时候，回调函数会立即添加到回调队列中；</li>
+<li>定时器事件(setTimeout) 由timer 模块来进行延时处理，当时间到达的时候，才会将回调函数添加到回调队列中；</li>
+<li>XHR(ajax)由network 模块来处理，在网络请求完成返回之后，才将回调函数添加到回调队列中；</li>
+</ol>
+<ul>
+<li><strong>前言小结</strong></li>
+</ul>
+<p>js中一切的异步任务都是要用 <strong>回调函数</strong> 实现的。<br>讲了这么多的概念我们来看一个经典的案例，通过这个案例来感受一下js的进步。</p>
+<p>题目：三秒后红灯亮一次，再过一秒后绿灯亮一次，再过2后黄灯亮一次；如何让三个灯不断交替亮？</p>
+<p>假设在不知道promise的情况下，我们可以这样实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let red = () =&gt; console.log(&apos;red&apos;);</div><div class="line">let green = () =&gt; console.log(&apos;green&apos;);</div><div class="line">let yellow = () =&gt; console.log(&apos;yellow&apos;);</div><div class="line"></div><div class="line">let light = () =&gt; &#123;</div><div class="line">    setTimeout(() =&gt; &#123;</div><div class="line">        // 红灯亮</div><div class="line">        red();</div><div class="line">        setTimeout( () =&gt; &#123;</div><div class="line">            // 绿灯亮</div><div class="line">            green();</div><div class="line">            setTimeout(() =&gt; &#123;</div><div class="line">                // 黄灯亮</div><div class="line">                yellow();</div><div class="line">                // 继续循环亮灯</div><div class="line">                light();</div><div class="line">            &#125;,1000)</div><div class="line">        &#125;,2000)</div><div class="line">    &#125;,3000);        </div><div class="line">&#125;</div><div class="line">// 走起</div><div class="line">light();</div></pre></td></tr></table></figure>
+<p><a href="https://codepen.io/mbiao/pen/EbeYYE" target="_blank" rel="external">看看效果</a></p>
+<blockquote>
+<p>虽然效果实现了，但是代码不是很优雅，下面来一步一步优化它</p>
+</blockquote>
+<h2 id="1、初探Promise的概念"><a href="#1、初探Promise的概念" class="headerlink" title="1、初探Promise的概念"></a>1、初探Promise的概念</h2><ul>
+<li>promise单词的含义：</li>
+</ul>
+<blockquote>
+<p>承诺在将来一定发生的事情。</p>
+</blockquote>
+<ul>
+<li><a href="http://malcolmyu.github.io/malnote/2015/06/12/Promises-A-Plus/" target="_blank" rel="external">promise/A+规范：</a></li>
+</ul>
+<blockquote>
+<p>一个开放、健全且通用的 JavaScript Promise 标准。由开发者制定，供开发者参考。</p>
+</blockquote>
+<p>你也可以自己实现一个promise，但是规范规定它必须是一个拥有 then 方法的对象或函数，其行为符合以下规范；</p>
+<ul>
+<li>规范摘要：</li>
+</ul>
+<p>Promise对象有<strong>三种状态</strong>：</p>
+<ol>
+<li>等待态（Pending）</li>
+<li>执行态（Fulfilled）</li>
+<li>拒绝态（Rejected）</li>
+</ol>
+<p>promise状态可转变，一旦转变状态不再变化，状态转变只有两种：</p>
+<ol>
+<li>“Pending”状态转到“Fulfilled”</li>
+<li>“Pending”状态转到“rejected”</li>
+</ol>
+<ul>
+<li><strong>then方法:</strong></li>
+</ul>
+<blockquote>
+<p>一个promise对象必须提供一个then方法，状态发生改变后调用该方法。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// @params onFulfilled（执行状态的回调），onRejected（拒绝状态的回调）</div><div class="line"></div><div class="line">// @return promise对象</div><div class="line"></div><div class="line">promise.then(onFulfilled, onRejected)</div></pre></td></tr></table></figure>
+<p>上面理论有点抽象，来个图看看：<br><img src="https://mabiao8023.github.io/web-flex/promise2.png" alt="image"></p>
+<p>针对以上promise的规范，jQuery等流行的js库参考规范都已经实现了这个对象,es6也实现了这个对象,下面来具体来看看怎么实现的？</p>
+<h2 id="2、es6中的promise"><a href="#2、es6中的promise" class="headerlink" title="2、es6中的promise"></a>2、es6中的promise</h2><p>ES6正式提出把Promise作为原生对象，原理实现以promise规范为主。</p>
+<p>ES6 Promise 先拉出来遛遛 ，新版浏览器中打印一下，es6中利用构造函数实现了promise：<br><img src="https://mabiao8023.github.io/web-flex/promise.png" alt="image"></p>
+<ul>
+<li><strong>基本用法(new , then , resolve , reject)</strong></li>
+</ul>
+<p>ES6规定，Promise对象是一个构造函数，用来生成Promise实例。</p>
+<p>下面代码创造了一个Promise实例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">function getNumber()&#123;</div><div class="line">    //实例化一个promise实例，构造函数接受一个函数作为参数</div><div class="line">    var p = new Promise(function(resolve, reject)&#123;</div><div class="line">        //做一些异步操作</div><div class="line">        setTimeout(function()&#123;</div><div class="line">            var num = Math.ceil(Math.random()*10); //生成1-10的随机数</div><div class="line">            if(num&lt;=5)&#123;</div><div class="line">                resolve(num);</div><div class="line">            &#125;</div><div class="line">            else&#123;</div><div class="line">                reject(&apos;数字太大了&apos;);</div><div class="line">            &#125;</div><div class="line">        &#125;, 2000);</div><div class="line">    &#125;);</div><div class="line">    </div><div class="line">    //返回promise对象</div><div class="line">    return p;            </div><div class="line">&#125;</div><div class="line"> </div><div class="line">getNumber()</div><div class="line">.then(</div><div class="line">    //已完成后的回调</div><div class="line">    function(data)&#123;</div><div class="line">        console.log(&apos;resolved&apos;);</div><div class="line">        console.log(data);</div><div class="line">    &#125;, </div><div class="line">    //已失败后的回调</div><div class="line">    function(reason, data)&#123;</div><div class="line">        console.log(&apos;rejected&apos;);</div><div class="line">        console.log(reason);</div><div class="line">    &#125;</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>getNumber函数用来异步获取一个数字，2秒后执行完成，如果数字小于等于5，我们认为是“成功”了，调用resolve修改Promise的状态。否则我们认为是“失败”了，调用reject并传递一个参数，作为失败的原因。</p>
+<p>then方法可以接受两个参数，第一个对应resolve的回调，第二个对应reject的回调，如果只有一个则是resolve的回调。</p>
+<p>运行结果：resolved 2 或者 rejected 数字太大了</p>
+<ul>
+<li><strong>catch用法</strong><br>它和then的第二个参数一样，用来指定reject的回调，用法是这样：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">getNumber()</div><div class="line">.then(function(data)&#123;</div><div class="line">    console.log(&apos;resolved&apos;);</div><div class="line">    console.log(data);</div><div class="line">&#125;)</div><div class="line">.catch(function(reason)&#123;</div><div class="line">    console.log(&apos;rejected&apos;);</div><div class="line">    console.log(reason);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><strong>不定宽高的垂直水平居中方法</strong><br>方法1：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.parent&#123;</div><div class="line">position:relative;</div><div class="line">&#125;</div><div class="line">.content&#123;</div><div class="line">position:absoulte;</div><div class="line">top:50%;</div><div class="line">left:50%;</div><div class="line">transform:translate(-50%,-50%);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>方法2：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.parent&#123;</div><div class="line">justify-content:center; //子元素水平居中</div><div class="line">align-items:center;     //子元素垂直居中</div><div class="line">display:-webkit-flex;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><a href="https://mabiao8023.github.io/web-flex/" target="_blank" rel="external">点我了解FFC牛逼的地方</a></p>
+<p>不过它还有另外一个作用：在执行resolve的回调（也就是上面then中的第一个参数）时，如果抛出异常了（代码出错了），那么并不会报错卡死js，而是会进到这个catch方法中。请看下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">getNumber()</div><div class="line">.then(function(data)&#123;</div><div class="line">    console.log(&apos;resolved&apos;);</div><div class="line">    console.log(data);</div><div class="line">    console.log(somedata); //此处的somedata未定义</div><div class="line">&#125;)</div><div class="line">.catch(function(reason)&#123;</div><div class="line">    console.log(&apos;rejected&apos;);</div><div class="line">    console.log(reason);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//运行结果</div><div class="line">//resolved</div><div class="line">//4 </div><div class="line">//rejected</div><div class="line">//ReferenceError: somedata is no defind(....)</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>all用法</strong><br>Promise的all方法提供了并行执行异步操作的能力，并且在所有异步操作执行完后才执行回调。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Promise</div><div class="line">.all([runAsync1(), runAsync2(), runAsync3()])</div><div class="line">.then(function(results)&#123;</div><div class="line">    console.log(results);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>all接收一个promise对象的数组参数。三个异步操作是并行执行的，等到它们都执行完后才会进到then里面。那么，三个异步操作返回的数据哪里去了呢？都在then里面呢，all会把所有异步操作的结果放进一个数组中传给then，就是上面的results。</p>
+<ul>
+<li><strong>race的用法</strong></li>
+</ul>
+<p>all方法实际上是「谁跑的慢，以谁为准执行回调」<br>race方法「谁跑的快，以谁为准执行回调」</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Promise</div><div class="line">.race([runAsync1(), runAsync2(), runAsync3()])</div><div class="line">.then(function(results)&#123;</div><div class="line">    console.log(results);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>多级链式调用</strong></li>
+</ul>
+<p>then方法返回一个promise对象，另外，在 then 的函数当中的返回值，可以作为后续操作的参数，因此上面的例子也可以写成,可以多级链式调用，按照回调的先后顺序依次执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Promise.then(function (message) &#123;</div><div class="line">    return message;</div><div class="line">&#125;).then(function (message) &#123;</div><div class="line">    return message  + &apos; World&apos;;</div><div class="line">&#125;).then(function (message) &#123;</div><div class="line">    return message + &apos;!&apos;;</div><div class="line">&#125;).then(function (message) &#123;</div><div class="line">    alert(message);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>小结</li>
+</ul>
+<blockquote>
+<p>使用es6中的promise来改写前言中提出的亮灯的问题</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">let red = () =&gt; console.log(&apos;red&apos;);</div><div class="line">let green = () =&gt; console.log(&apos;green&apos;);</div><div class="line">let yellow = () =&gt; console.log(&apos;yellow&apos;);</div><div class="line"></div><div class="line">// 使用promise封装灯亮的异步定时函数</div><div class="line">let lightPro = (callback,time) =&gt; &#123;</div><div class="line">    // 实例化promise对象</div><div class="line">    return new Promise((resolve,reject) =&gt; &#123;</div><div class="line">        setTimeout(() =&gt; &#123;</div><div class="line">            callback();</div><div class="line">            // 异步成功调用</div><div class="line">            resolve();</div><div class="line">        &#125;,time)</div><div class="line">    &#125;)</div><div class="line">&#125;；</div><div class="line">   </div><div class="line">let light = () =&gt; &#123;</div><div class="line">    lightPro(red,3000)</div><div class="line">        .then( _ =&gt;  lightPro(green,2000) )</div><div class="line">        .then( _ =&gt;  lightPro(yellow,1000))</div><div class="line">        .then( _ =&gt; light());</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 走起</div><div class="line">light();</div></pre></td></tr></table></figure>
+<p>很明显，效果实现是一样的，但是在代码层次方面，优雅了不少，多级回调被串联的方式取代，越复杂的回调越被改进的优雅。</p>
+<h2 id="3、es6中-Generator-函数的异步应用参考"><a href="#3、es6中-Generator-函数的异步应用参考" class="headerlink" title="3、es6中 Generator 函数的异步应用参考"></a>3、es6中 Generator 函数的异步应用参考</h2><p>上一节中es6中实现的promise对象其实有很多其他的库都实现了类似的功能，与其他库（O.js,bluebird.js等）相比优势并不明显。</p>
+<p>Promise 的最大问题是代码冗余，原来的任务被 Promise 包装了一下，不管什么操作，一眼看去都是一堆then，原来的语义变得很不清楚。</p>
+<p>那么，有没有更好的写法呢？</p>
+<p>答案肯定是有的，es6中的Generator 函数将 JavaScript 异步编程带入了一个全新的阶段。</p>
+<ul>
+<li><strong>协程</strong></li>
+</ul>
+<p>传统的编程语言，早有异步编程的解决方案（其实是多任务的解决方案）。其中有一种叫做”协程”（coroutine），意思是多个线程互相协作，完成异步任务。</p>
+<p>协程有点像函数，又有点像线程。它的运行流程大致如下。</p>
+<ol>
+<li>第一步，协程A开始执行。</li>
+<li>第二步，协程A执行到一半，进入暂停，执行权转移到协程B。</li>
+<li>第三步，（一段时间后）协程B交还执行权。</li>
+<li>第四步，协程A恢复执行。</li>
+</ol>
+<p>上面流程的协程A，就是异步任务，因为它分成两段（或多段）执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 读文件的列子</div><div class="line">function* asyncJob() &#123;</div><div class="line">  // ...其他代码</div><div class="line">  var f = yield readFile(fileA);</div><div class="line">  // ...其他代码</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面代码的函数asyncJob是一个协程，它的奥妙就在其中的yield命令。它表示执行到此处，执行权将交给其他协程。也就是说，yield命令是异步两个阶段的分界线。</p>
+<p>协程遇到yield命令就暂停，等到执行权返回，再从暂停的地方继续往后执行。它的最大优点，就是代码的写法非常像同步操作，如果去除yield命令，简直一模一样。</p>
+<ul>
+<li><strong>协程的 Generator 函数实现与应用</strong> </li>
+</ul>
+<p>Generator 函数是协程在 ES6 的实现，最大特点就是可以交出函数的执行权（即暂停执行）。</p>
+<p>整个 Generator 函数就是一个封装的异步任务，或者说是异步任务的容器。异步操作需要暂停的地方，都用yield语句注明。Generator 函数的执行方法如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">let red = () =&gt; console.log(&apos;red&apos;);</div><div class="line">let green = () =&gt; console.log(&apos;green&apos;);</div><div class="line">let yellow = () =&gt; console.log(&apos;yellow&apos;);</div><div class="line"></div><div class="line">// 使用promise封装灯亮的异步定时函数</div><div class="line">let lightPro = (callback,time) =&gt; &#123;</div><div class="line">    // 实例化promise对象</div><div class="line">    return new Promise((resolve,reject) =&gt; &#123;</div><div class="line">        setTimeout(() =&gt; &#123;</div><div class="line">            callback();</div><div class="line">            // 异步成功调用</div><div class="line">            resolve();</div><div class="line">        &#125;,time)</div><div class="line">    &#125;)</div><div class="line">&#125;；</div><div class="line">   </div><div class="line">let light = function* () =&gt; &#123;</div><div class="line">    yield lightPro(red,3000);</div><div class="line">    yield lightPro(green,2000);</div><div class="line">    yield lightPro(yellow,1000);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 走起</div><div class="line">let lightheight = () =&gt; &#123;</div><div class="line">    let g = light();</div><div class="line">    g.next();   // &#123; value: undefined, done: false &#125;</div><div class="line">    g.next();   // &#123; value: undefined, done: false &#125;</div><div class="line">    g.next();  // &#123; value: undefined, done: true &#125;</div><div class="line">    lightheight();</div><div class="line">&#125;</div><div class="line"></div><div class="line">lightheight();</div></pre></td></tr></table></figure>
+<p>上面代码中，调用 Generator 函数，会返回一个内部指针（即遍历器）g。这是 Generator 函数不同于普通函数的另一个地方，即执行它不会返回结果，返回的是指针对象。调用指针g的next方法，会移动内部指针（即执行异步任务的第一段），指向第一个遇到的yield语句。</p>
+<p>换言之，next方法的作用是分阶段执行Generator函数。每次调用next方法，会返回一个对象，表示当前阶段的信息（value属性和done属性）。value属性是yield语句后面表达式的值，表示当前阶段的值；done属性是一个布尔值，表示 Generator 函数是否执行完毕，即是否还有下一个阶段。</p>
+<ul>
+<li>小结</li>
+</ul>
+<blockquote>
+<p>上述方法对promise的操作进行了简化，但是其异步操作完全是基于promise实现的异步操作。但是还是感觉有点复杂，不要怕，下面来还有更骚的操作。</p>
+</blockquote>
+<h2 id="4、ES2017-中的async骚操作"><a href="#4、ES2017-中的async骚操作" class="headerlink" title="4、ES2017 中的async骚操作"></a>4、ES2017 中的async骚操作</h2><ul>
+<li><strong>async 函数是什么？</strong></li>
+</ul>
+<blockquote>
+<p>它其实就是 Generator 函数的语法糖。目前promise的最优秀的解决方案。koa2已经全面使用该语法。</p>
+</blockquote>
+<p>用async改写红黄绿灯的案例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">let red = () =&gt; console.log(&apos;red&apos;);</div><div class="line">let green = () =&gt; console.log(&apos;green&apos;);</div><div class="line">let yellow = () =&gt; console.log(&apos;yellow&apos;);</div><div class="line"></div><div class="line">// 使用promise封装灯亮的异步定时函数</div><div class="line">let lightPro = (callback,time) =&gt; &#123;</div><div class="line">    // 实例化promise对象</div><div class="line">    return new Promise((resolve,reject) =&gt; &#123;</div><div class="line">        setTimeout(() =&gt; &#123;</div><div class="line">            callback();</div><div class="line">            // 异步成功调用</div><div class="line">            resolve();</div><div class="line">        &#125;,time)</div><div class="line">    &#125;)</div><div class="line">&#125;；</div><div class="line"></div><div class="line">// 走你</div><div class="line">let light = async function() =&gt; &#123;</div><div class="line">    await lightPro(red,3000);</div><div class="line">    await lightPro(green,2000);</div><div class="line">    await lightPro(yellow,1000);</div><div class="line">    light();</div><div class="line">&#125;</div><div class="line">light();</div></pre></td></tr></table></figure>
+<p>一比较就会发现，async函数就是将 Generator 函数的星号（*）替换成async，将yield替换成await，仅此而已。</p>
+<blockquote>
+<p>发现没有Generator中异步操作执行的时机需要调用g.next(),需要自主控制时机执行，<br>但是async就不一样了，在调用async函数时，内部的异步操作会按照预先设计好的顺序执行，不用再麻烦的调用g.next()的方法了。</p>
+</blockquote>
+<ul>
+<li>async函数对 Generator 函数的改进点</li>
+</ul>
+<p>1.内置执行器，也就是上面提到的Generator 函数的执行必须靠执行器，而async函数自带执行器。也就是说，async函数的执行，与普通函数一模一样，只要一行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// Generator</div><div class="line">let lightheight = () =&gt; &#123;</div><div class="line">    let g = light();</div><div class="line">    g.next();   // &#123; value: undefined, done: false &#125;</div><div class="line">    g.next();   // &#123; value: undefined, done: false &#125;</div><div class="line">    g.next();  // &#123; value: undefined, done: true &#125;</div><div class="line">    lightheight();</div><div class="line">&#125;</div><div class="line">lightheight();</div><div class="line"></div><div class="line">// async只要一行搞定</div><div class="line">light();</div></pre></td></tr></table></figure>
+<ol>
+<li>更好的语义，async（异步）和await（等待），比起星号和yield，语义更清楚了。</li>
+<li>更广的适用性，yield命令后面只能是 Thunk 函数或 Promise 对象，而async函数的await命令后面，可以是 Promise 对象和原始类型的值（数值、字符串和布尔值，但这时等同于同步操作）。</li>
+<li>返回值是 Promise，async函数的返回值是 Promise 对象，这比 Generator 函数的返回值是 Iterator 对象方便多了。你可以用then方法指定下一步的操作。</li>
+</ol>
+<blockquote>
+<p>进一步说，async函数完全可以看作多个异步操作，包装成的一个 Promise 对象，而await命令就是内部then命令的语法糖。</p>
+</blockquote>
+<ul>
+<li><strong>基本用法</strong></li>
+</ul>
+<p>底层使用到的异步封装也是基于promise实现的。具体的使用方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">// 函数声明</div><div class="line">async function foo() &#123;&#125;</div><div class="line"></div><div class="line">// 函数表达式</div><div class="line">const foo = async function () &#123;&#125;;</div><div class="line"></div><div class="line">// 对象的方法</div><div class="line">let obj = &#123; async foo() &#123;&#125; &#125;;</div><div class="line">obj.foo().then(...)</div><div class="line"></div><div class="line">// Class 的方法</div><div class="line">class Storage &#123;</div><div class="line">  constructor() &#123;</div><div class="line">    this.cachePromise = caches.open(&apos;avatars&apos;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  async getAvatar(name) &#123;</div><div class="line">    const cache = await this.cachePromise;</div><div class="line">    return cache.match(`/avatars/$&#123;name&#125;.jpg`);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const storage = new Storage();</div><div class="line">storage.getAvatar(&apos;jake&apos;).then(…);</div><div class="line"></div><div class="line">// 箭头函数</div><div class="line">const foo = async () =&gt; &#123;&#125;;</div></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>错误处理机制</strong></li>
+</ul>
+<blockquote>
+<p> async函数的语法规则总体上比较简单，难点是错误处理机制。</p>
+</blockquote>
+<p>async函数内部抛出错误，会导致返回的 Promise 对象变为reject状态。抛出的错误对象会被catch方法回调函数接收到。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">async function f() &#123;</div><div class="line">  await Promise.reject(&apos;出错了&apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">f().then(v =&gt; console.log(v))</div><div class="line">    .catch( e =&gt; console.log(e))</div><div class="line">// Error: 出错了</div></pre></td></tr></table></figure></p>
+<p>只要一个await语句后面的 Promise 变为reject，那么整个async函数都会中断执行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">async function f() &#123;</div><div class="line">  await Promise.reject(&apos;出错了&apos;);</div><div class="line">  await Promise.resolve(&apos;hello world&apos;); // 不会执行</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面代码中，第二个await语句是不会执行的，因为第一个await语句状态变成了reject。<br>有时，我们希望即使前一个异步操作失败，也不要中断后面的异步操作。这时可以将第一个await放在try…catch结构里面，这样不管这个异步操作是否成功，第二个await都会执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">async function f() &#123;</div><div class="line">  try &#123;</div><div class="line">    await Promise.reject(&apos;出错了&apos;);</div><div class="line">  &#125; catch(e) &#123;</div><div class="line">  &#125;</div><div class="line">  return await Promise.resolve(&apos;hello world&apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">f()</div><div class="line">.then(v =&gt; console.log(v))</div><div class="line">// hello world</div><div class="line"></div><div class="line">// 也可以这样的promise后面跟catch捕获前一个promise的错误</div><div class="line">async function f() &#123;</div><div class="line">  await Promise.reject(&apos;出错了&apos;)</div><div class="line">    .catch(e =&gt; console.log(e));</div><div class="line">  return await Promise.resolve(&apos;hello world&apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">f()</div><div class="line">.then(v =&gt; console.log(v))</div><div class="line">// 出错了</div><div class="line">// hello world</div></pre></td></tr></table></figure>
+<p>所以防止出错的方法，也是将其放在try…catch代码块之中。如果有多个await命令，可以统一放在try…catch结构中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">async function main() &#123;</div><div class="line">  try &#123;</div><div class="line">    const val1 = await firstStep();</div><div class="line">    const val2 = await secondStep(val1);</div><div class="line">    const val3 = await thirdStep(val1, val2);</div><div class="line"></div><div class="line">    console.log(&apos;Final: &apos;, val3);</div><div class="line">  &#125;</div><div class="line">  catch (err) &#123;</div><div class="line">    console.error(err);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>使用async的注意点</li>
+</ul>
+<ol>
+<li>错误处理，用try…catch捕获</li>
+<li><p>多个await命令后面的异步操作，如果不存在继发关系，最好让它们同时触发。其实就是并发，减少等待时间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 这样getBar的执行必须要等到getFoo执行完成后才去执行</div><div class="line">let foo = await getFoo();</div><div class="line">let bar = await getBar();</div><div class="line"></div><div class="line">// 其实这两函数并没有依赖关系，等着只能浪费时间，可以采用如下的写法</div><div class="line">// 写法一</div><div class="line">let [foo, bar] = await Promise.all([getFoo(), getBar()]);</div><div class="line"></div><div class="line">// 写法二</div><div class="line">let fooPromise = getFoo();</div><div class="line">let barPromise = getBar();</div><div class="line">let foo = await fooPromise;</div><div class="line">let bar = await barPromise;</div></pre></td></tr></table></figure>
+<p>3.await和async必须成对出现，await不能用在forEach循环中，偶尔会出错，要使用最好使用for循环代替，<strong>forEach的坑我真的踩过</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">// bad</div><div class="line">function dbFuc(db) &#123; //这里不需要 async</div><div class="line">  let docs = [&#123;&#125;, &#123;&#125;, &#123;&#125;];</div><div class="line"></div><div class="line">  // 可能得到错误结果</div><div class="line">  docs.forEach(async function (doc) &#123;</div><div class="line">    await db.post(doc);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// best</div><div class="line"></div><div class="line">async function dbFuc(db) &#123;</div><div class="line">  let docs = [&#123;&#125;, &#123;&#125;, &#123;&#125;];</div><div class="line"></div><div class="line">  for (let doc of docs) &#123;</div><div class="line">    await db.post(doc);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="5、最后"><a href="#5、最后" class="headerlink" title="5、最后"></a>5、最后</h2><p>通过以上几点，我们大概了解了关于promise的整个发展过程，语法再不断的升级，使我们写的代码越来越优雅，估计在不久的将来还会有更厉害更简洁的语法出现，但是这些语法的基础都是基于promise实现的异步处理实现的，所以建议大家可以多多熟悉promise的规范，接下来会尝试写一关于promise具体实现的文章，帮助自己及大家更深入的了解promise。文章中很多内容大多都是引用其他优秀的文章，其中也加了一些自己的理解，希望大家能多多提意见。</p>
+<p>参考链接：<br>1.<a href="http://malcolmyu.github.io/malnote/2015/06/12/Promises-A-Plus" target="_blank" rel="external">Promises/A+规范</a>;<br>2.<a href="http://es6.ruanyifeng.com/#docs/promise" target="_blank" rel="external">es6标准教程-promise-阮一峰</a>;<br>3.<a href="http://es6.ruanyifeng.com/#docs/generator-async" target="_blank" rel="external">es6标准教程-Generator 函数的异步应用-阮一峰</a>;<br>4.<a href="http://es6.ruanyifeng.com/#docs/async" target="_blank" rel="external">es6标准教程-async 函数-阮一峰</a>;</p>
 
       
 
@@ -285,17 +405,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css,FC,BFC,IFC,FFC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -346,7 +455,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/11/01/前端布局中的FC/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/11/28/promise入门到入门/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -360,18 +469,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/11/28/promise入门到入门/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          promise入门到入门
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/10/24/my-new-post/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">my new post</div>
+    <a href="/2017/11/01/前端布局中的FC/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">前端布局中的FC</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -398,7 +498,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#css布局中的FC"><span class="toc-number">1.</span> <span class="toc-text">css布局中的FC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、BOX"><span class="toc-number">1.0.1.</span> <span class="toc-text">1、BOX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、什么是FC-W3C-CSS2-1-规范中的一个概念"><span class="toc-number">1.0.2.</span> <span class="toc-text">2、什么是FC(W3C CSS2.1 规范中的一个概念)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、什么是BFC？"><span class="toc-number">1.0.3.</span> <span class="toc-text">3、什么是BFC？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-布局规则"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">3.1 布局规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-这么厉害？怎么样才能成为BFC呢"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">3.1 这么厉害？怎么样才能成为BFC呢</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2举个栗子解读BFC"><span class="toc-number">1.0.3.3.</span> <span class="toc-text">3.2举个栗子解读BFC</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、IFC"><span class="toc-number">1.0.4.</span> <span class="toc-text">4、IFC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、FFC"><span class="toc-number">1.0.5.</span> <span class="toc-text">5、FFC</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Promise从入门到入门"><span class="toc-number">1.</span> <span class="toc-text">Promise从入门到入门</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1、初探Promise的概念"><span class="toc-number">1.2.</span> <span class="toc-text">1、初探Promise的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、es6中的promise"><span class="toc-number">1.3.</span> <span class="toc-text">2、es6中的promise</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、es6中-Generator-函数的异步应用参考"><span class="toc-number">1.4.</span> <span class="toc-text">3、es6中 Generator 函数的异步应用参考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、ES2017-中的async骚操作"><span class="toc-number">1.5.</span> <span class="toc-text">4、ES2017 中的async骚操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、最后"><span class="toc-number">1.6.</span> <span class="toc-text">5、最后</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
