@@ -147,6 +147,113 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-CORS非简单请求" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/30/CORS非简单请求/">CORS非简单请求</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/30/CORS非简单请求/" class="archive-article-date">
+  	<time datetime="2018-03-30T01:28:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近听大公司LingHit后端同事说接口请求都要以http协议规范化，不能只使用GET/POST等请求，要根据需求使用对应的请求名称，那么对于前端同学来说，在跨域的情况下问题就出现了，请求失效了……,这到底是为什么呢？</p>
+<p>下面我们先来看一下经常使用的http请求流程是怎么样的呢？？<br><img src="http://www.lovejavascript.com/upload/ueditor/pic/20170216/1487235754096.png" alt="此处输入图片的描述"><br>看明白了吧！之所以你的请求没有响应是由于后端大哥们没有对非简单请求做出响应处理。这时候你就可以去找他们了，然而他们肯定也是一脸懵B，你要做的就是教他们改。。。。。。</p>
+<hr>
+<h2 id="请求分类"><a href="#请求分类" class="headerlink" title="请求分类"></a>请求分类</h2><p>首先了解下CORS,<br>CORS即Cross Origin Resource Sharing（跨来源资源共享），通俗说就是我们所熟知的跨域请求。众所周知，在以前，跨域可以采用代理、JSONP等方式，而在Modern浏览器面前，这些终将成为过去式，因为有了CORS。</p>
+<h3 id="CORS可以分为以下两种："><a href="#CORS可以分为以下两种：" class="headerlink" title="CORS可以分为以下两种："></a>CORS可以分为以下两种：</h3><h4 id="1、简单请求"><a href="#1、简单请求" class="headerlink" title="1、简单请求"></a>1、简单请求</h4><p>属于简单请求的是下面几种：</p>
+<h5 id="1-1-http方法是以下中一个："><a href="#1-1-http方法是以下中一个：" class="headerlink" title="1.1 http方法是以下中一个："></a>1.1 http方法是以下中一个：</h5><ul>
+<li>HEAD</li>
+<li>GET</li>
+<li>POST<h5 id="1-2-HTTP头信息不超出以下几种字段"><a href="#1-2-HTTP头信息不超出以下几种字段" class="headerlink" title="1.2 HTTP头信息不超出以下几种字段"></a>1.2 HTTP头信息不超出以下几种字段</h5></li>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Last-Event-ID</li>
+<li>Content-Type:(application/x-www-form-urlencoded或<br>multipart/form-data或<br>text/plain)</li>
+</ul>
+<blockquote>
+<p>任何一个不满足上述要求的请求，即被认为是复杂请求。一个复杂请求不仅有包含通信内容的请求，同时也包含预请求（preflight request）。</p>
+</blockquote>
+<h4 id="1、非简单请求"><a href="#1、非简单请求" class="headerlink" title="1、非简单请求"></a>1、非简单请求</h4><p>任何不满足上述简单请求要求的请求，都属于复杂请求。比如说你需要发送PUT、DELETE等HTTP动作，或者发送Content-Type: application/json的内容。<br>表面上看起来和简单请求使用上差不多，但实际上浏览器发送了不止一个请求。其中最先发送的是一种”预请求”，此时作为服务端，也需要返回”预回应”作为响应。预请求实际上是对服务端的一种权限请求，只有当预请求成功返回，实际请求才开始执行。<br>（todo:补个图）</p>
+<p>预请求以OPTIONS形式发送，当中同样包含域，并且还包含了两项CORS特有的内容：</p>
+<blockquote>
+<p>Access-Control-Request-Method – 该项内容是实际请求的种类，可以是GET、POST之类的简单请求，也可以是PUT、DELETE等等。<br>Access-Control-Request-Headers – 该项是一个以逗号分隔的列表，当中是复杂请求所使用的头部。</p>
+</blockquote>
+<p>显而易见，这个预请求实际上就是在为之后的实际请求发送一个权限请求，在预回应返回的内容当中，服务端应当对这两项进行回复，以让浏览器确定请求是否能够成功完成。</p>
+<p>复杂请求的部分响应头及解释如下：</p>
+<blockquote>
+<p>Access-Control-Allow-Origin（必含） – 和简单请求一样的，必须包含一个域。<br>Access-Control-Allow-Methods（必含） – 这是对预请求当中Access-Control-Request-Method的回复，这一回复将是一个以逗号分隔的列表。尽管客户端或许只请求某一方法，但服务端仍然可以返回所有允许的方法，以便客户端将其缓存。<br>Access-Control-Allow-Headers（当预请求中包含Access-Control-Request-Headers时必须包含） – 这是对预请求当中Access-Control-Request-Headers的回复，和上面一样是以逗号分隔的列表，可以返回所有支持的头部。这里在实际使用中有遇到，所有支持的头部一时可能不能完全写出来，而又不想在这一层做过多的判断，没关系，事实上通过request的header可以直接取到Access-Control-Request-Headers，直接把对应的value设置到Access-Control-Allow-Headers即可。<br>Access-Control-Allow-Credentials（可选） – 和简单请求当中作用相同。<br>Access-Control-Max-Age（可选） – 以秒为单位的缓存时间。预请求的的发送并非免费午餐，允许时应当尽可能缓存。</p>
+</blockquote>
+<p> 一旦预回应如期而至，所请求的权限也都已满足，则实际请求开始发送。</p>
+<hr>
+<h2 id="后端解决方法"><a href="#后端解决方法" class="headerlink" title="后端解决方法"></a>后端解决方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">header(&apos;Access-Control-Allow-Origin:*&apos;);  //支持全域名访问，不安全，部署后需要限制为R.com</div><div class="line">header(&apos;Access-Control-Allow-Methods:POST,GET,OPTIONS,DELETE&apos;); //支持的http动作根据需求添加</div><div class="line">header(&apos;Access-Control-Allow-Headers:x-requested-with,content-type&apos;);  //响应头 请按照自己需求添加。</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><p>这样浏览器每次会发起两次请求，增加了响应时间，虽然后端可以设置过期时间，但是用户第一次访问时是会有问题，所以前端尽量少使用复杂请求，跨域问题留给后端处理。。。。。。。。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">http</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/30/CORS非简单请求/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-css样式书写规范" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
