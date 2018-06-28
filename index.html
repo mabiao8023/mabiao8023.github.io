@@ -147,6 +147,162 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-GreenSock-TweenMax极简入门指南" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/28/GreenSock-TweenMax极简入门指南/">GreenSock-TweenMax极简入门指南</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/28/GreenSock-TweenMax极简入门指南/" class="archive-article-date">
+  	<time datetime="2018-06-28T06:11:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="GreenSock简介"><a href="#GreenSock简介" class="headerlink" title="GreenSock简介"></a>GreenSock简介</h1><p>GreenSock在Flash动画时代久负盛名，并且GreenSock的维护团队与时俱进，推出了以javascript为核心的GreenSock，在Flash和HTML5项目中，你可以使用相同的动画工具集，同样的API，同样的开发体验，同样关注性能。</p>
+<p>它具有以下优点:</p>
+<ul>
+<li>速度快。GSAP专门优化了动画性能，使之实现和CSS一样的高性能动画效果。</li>
+<li>轻量与模块化。模块化与插件式的结构保持了核心引擎的轻量，TweenLite包非常小（基本上低于7kb）。GSAP提供了TweenLite, TimelineLite, TimelineMax 和 TweenMax不同功能的动画模块，你可以按需使用。</li>
+<li>没有依赖。</li>
+<li>灵活控制。不用受限于线性序列，可以重叠动画序列，你可以通过精确时间控制，灵活地使用最少的代码实现动画。</li>
+<li>任何对象都可以实现动画。</li>
+</ul>
+<p>开始之前先来了解下GSAP动画平台四个插件的不同功能。如下图所示：</p>
+<p><img src="https://segmentfault.com/img/remote/1460000007496081?w=600&amp;h=920" alt="插件图"></p>
+<p> 对应四个插件，GreenSock也相应提供对应的四个JavaScript序列工具方法来开发动画，主要是TweenLite、TweenlineLite、TweenlineMax、TweenMax。</p>
+<p> 建议在开发中使用TweenMax这个全功能的js文件，它包括了GreenSock动画平台的所有核心的功能。</p>
+<hr>
+<h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><p> 本教程主要以TweenMax这个全功能的js文件为基础，它包括了GreenSock动画平台的所有核心的功能。还需要引入jquery来选择和操作DOM。</p>
+<h2 id="选择元素"><a href="#选择元素" class="headerlink" title="选择元素"></a>选择元素</h2> <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">html</span>, <span class="selector-tag">body</span> &#123;</div><div class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-tag">body</span> &#123;</div><div class="line">  <span class="attribute">background-color</span>: <span class="number">#262626</span>;</div><div class="line">  <span class="attribute">font-family</span>: <span class="string">'Open Sans'</span>, sans-serif;</div><div class="line">  <span class="attribute">overflow</span>: hidden;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#box</span> &#123;</div><div class="line">  <span class="attribute">background-color</span>: <span class="number">#88ce02</span>;</div><div class="line">  <span class="attribute">position</span>: absolute;</div><div class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</div><div class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</div><div class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</div><div class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(-50%, -50%);</div><div class="line">  <span class="attribute">z-index</span>: <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.boxSmall</span> &#123;</div><div class="line">  <span class="attribute">position</span>: absolute;</div><div class="line">  <span class="attribute">background-color</span>: <span class="number">#70a40b</span>;</div><div class="line">  <span class="attribute">position</span>: absolute;</div><div class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">width</span>: <span class="number">25px</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">75px</span>;</div><div class="line">  <span class="attribute">z-index</span>: <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"boxSmall"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 通过jqery选择元素 接下来让它动起来</span></div><div class="line"><span class="keyword">var</span> $box = $(<span class="string">'#box'</span>);</div></pre></td></tr></table></figure>
+<h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><h3 id="TweenLite-to-方法"><a href="#TweenLite-to-方法" class="headerlink" title="TweenLite.to()方法"></a>TweenLite.to()方法</h3><p>下面就是让它动起来，可以使用TweenLite.to()方法来使元素动起来。比如，让元素移动到浏览器左边的边缘，我们就可以使用TweenLite.to()方法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">TweenLite.to($box, <span class="number">0.7</span>, &#123;<span class="attr">left</span>: <span class="number">0</span>&#125;);</div><div class="line"><span class="comment">// TweenLite.to(what, duration, &#123; which CSS properties &#125;);</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>在GreenSock中，一些CSS属性对应到GreenSock中还是有些不同的。比如transform中translate在GreenSock中使用x,y就对应着translate(x,y)。任何的CSS属性需要从有－的写法变为驼峰式的写法。比如background-color修改为backgroundColor等。以及CSS中的transform:rotate()变为rotation。</p>
+</blockquote>
+<h3 id="TweenLite-from-方法"><a href="#TweenLite-from-方法" class="headerlink" title="TweenLite.from()方法"></a>TweenLite.from()方法</h3><p>TweenLite.from顾名思义，就是使元素从指定的属性的值运动到元素的初始值。还是以上一个demo为例子，修改代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TweenLite.from($box, <span class="number">2</span>, &#123;<span class="attr">x</span>: <span class="string">'-=200px'</span>, <span class="attr">autoAlpha</span>: <span class="number">0</span>&#125;);</div></pre></td></tr></table></figure>
+<p>上面的代码是用来使元素从定义在.from()方法里的位置运动到在CSS中定义的位置。</p>
+<h3 id="TweenLite-set"><a href="#TweenLite-set" class="headerlink" title="TweenLite.set()"></a>TweenLite.set()</h3><p>有时候，我们只是想设置元素的一些CSS属性并不需要动画效果，比如，重设元素的位置。</p>
+<p>这个时候就可以使用GreenSock提供的.set()方法。<br>去掉我们前面编写的代码除了定义好的$box变量，编写下面的代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">TweenLite.set($box, &#123;<span class="attr">x</span>: <span class="string">'-=200px'</span>, <span class="attr">scale</span>: <span class="number">0.3</span>&#125;);</div><div class="line">TweenLite.set($box, &#123;<span class="attr">x</span>: <span class="string">'+=100px'</span>, <span class="attr">scale</span>: <span class="number">0.6</span>, <span class="attr">delay</span>: <span class="number">1</span>&#125;);</div><div class="line">TweenLite.set($box, &#123;<span class="attr">x</span>: <span class="string">'-50%'</span>, <span class="attr">scale</span>: <span class="number">1</span>, <span class="attr">delay</span>: <span class="number">2</span>&#125;);</div></pre></td></tr></table></figure></p>
+<p>运行上面的代码，可以看到元素只是单纯的在改变属性并没有动画效果。</p>
+<h3 id="TweenLite-fromTo-方法"><a href="#TweenLite-fromTo-方法" class="headerlink" title="TweenLite.fromTo()方法"></a>TweenLite.fromTo()方法</h3><p>最后来说一说TweenLite.fromTo这个方法。</p>
+<p>顾名思义，这个方法我们可以定义元素的起始位置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TweenLite.fromTo($box, <span class="number">2</span>, &#123;<span class="attr">x</span>: <span class="string">'-=200px'</span>&#125;, &#123;<span class="attr">x</span>: <span class="number">150</span>&#125;);</div></pre></td></tr></table></figure>
+<h2 id="缓动曲线"><a href="#缓动曲线" class="headerlink" title="缓动曲线"></a>缓动曲线</h2><p>TweenMax提供了下面这些运动曲线：</p>
+<p>1、Back 2、SlowMo 3、StppedEase 4、RoughEase 5、Bounce 6、Circ 7、Elastic 8、Expo 9、Sine</p>
+<p>具体曲线运动效果，可以去<a href="https://greensock.com/ease-visualizer" target="_blank" rel="external">这个地址</a>看看：</p>
+<p>在实际开发中，开发动画效果都会在动画过程中做一些其它的操作，这个时候就要用到回调函数了。TweenMax提供了在动画各个阶段的回调方法，使用起来非常方便。</p>
+<h2 id="回调方法"><a href="#回调方法" class="headerlink" title="回调方法"></a>回调方法</h2><p>首先以.fromTo()方法来说明回调的使用用法。</p>
+<p>比如，我们想要在动画开始的时候来触发回调函数。首先来创建一个start的函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'start'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>触发回调函数，只需要添加这句代码就可以了onStart:start就可以了，非常简单吧。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TweenLite.fromTo($box, <span class="number">2</span>, &#123;<span class="attr">y</span>: <span class="string">'-=200px'</span>&#125;, &#123;<span class="attr">y</span>: <span class="number">100</span>, <span class="attr">ease</span>: Bounce.easeOut,<span class="attr">onStart</span>:start&#125;);</div></pre></td></tr></table></figure>
+<p>你也可以添加onUpdate和onComplete来触发对应的回调函数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'start'</span>);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">update</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'animating'</span>);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">complete</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'end'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>OK，到目前为止，我们开发的动画都是针对单个元素的运动。在实际开发中有时候需要多个元素一起运动，只是运动的属性的值不同而已，比如像下面这样的动画：</p>
+<p><img src="http://ww1.sinaimg.cn/large/0060lm7Tgw1f99982ulhug30hq0crt9w.gif" alt=""></p>
+<h2 id="多个元素运动"><a href="#多个元素运动" class="headerlink" title="多个元素运动"></a>多个元素运动</h2><h3 id="staggered-方法"><a href="#staggered-方法" class="headerlink" title="staggered()方法"></a>staggered()方法</h3><p>也许可以使用TimelineLite.to()方法一个一个的来执行。这样虽然可以达到目的，但是不够优雅。greensock给我们提供了staggered()这一方法来实现，先来看看staggerFrom这个方法的语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// TweenMax.staggerFrom( targets:Array, duration:Number, vars:Object, stagger:Number, onCompleteAll:Function, onCompleteAllParams:Array, onCompleteAllScope:* )</span></div></pre></td></tr></table></figure>
+<p>TweenMax.staggerFrom(targets:目标元素为一个数组,duration:动画执行时间,vars:动画的属性，比如位移、放大缩小以及延迟等,stagger:表示目标数组中的每一个对象动画延迟执行的时间,onCompleteAll:所有的序列动画完成后的回调方法,onCompleteAllParams:传参数给onCompleteAll方法)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">TweenMax.staggerFrom(<span class="string">".btn"</span>, <span class="number">2</span>, &#123;<span class="attr">scale</span>:<span class="number">0.5</span>, <span class="attr">opacity</span>:<span class="number">0</span>, <span class="attr">delay</span>:<span class="number">0.5</span>, <span class="attr">ease</span>:Elastic.easeOut, <span class="attr">force3D</span>:<span class="literal">true</span>&#125;, <span class="number">0.2</span>);</div><div class="line"></div><div class="line">$(<span class="string">".btn"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  TweenMax.staggerTo(<span class="string">".btn"</span>, <span class="number">0.5</span>, &#123;<span class="attr">opacity</span>:<span class="number">0</span>, <span class="attr">y</span>:<span class="number">-100</span>, <span class="attr">ease</span>:Back.easeIn&#125;, <span class="number">0.1</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>从代码可以看到，使用stagger()方法可以同时操作多个元素来产生动画效果，仅仅只需要一句代码方便好使。</p>
+<h3 id="staggerFrom-方法使用高级技巧cycle"><a href="#staggerFrom-方法使用高级技巧cycle" class="headerlink" title="staggerFrom()方法使用高级技巧cycle"></a>staggerFrom()方法使用高级技巧cycle</h3><p>像上面的例子，我们只能一次赋予一个属性一个值，如x:100, rotation:90。如果我们想一次性让元素的属性能随机的随指定的值来运动，就可以使用到taggerFrom()方法中的cycle来达到目的，如下实例所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">TweenLite.set(<span class="string">".wrapper"</span>,&#123;<span class="attr">visibility</span>:<span class="string">"visible"</span>&#125;);</div><div class="line"><span class="keyword">var</span> tl = <span class="keyword">new</span> TimelineMax();</div><div class="line">tl.staggerFrom(<span class="string">".list li"</span>,<span class="number">0.5</span>,&#123;</div><div class="line">  opacity:<span class="number">0</span>,</div><div class="line">  cycle:&#123;</div><div class="line">    x:[<span class="number">-100</span>,<span class="number">100</span>],   <span class="comment">//x:[-100,100,200,300]  rotationX:[-90,90]</span></div><div class="line">    <span class="comment">//rotationX:[-90,90],</span></div><div class="line">    <span class="comment">//transformOrigin:["50% top -100","50% bottom 100"]</span></div><div class="line">    <span class="comment">//x:function(i)&#123;</span></div><div class="line">      <span class="comment">//return Math.random() * 300;</span></div><div class="line">      <span class="comment">//return (i+1) * 50;</span></div><div class="line">    <span class="comment">//&#125;,</span></div><div class="line">    ease:<span class="function"><span class="keyword">function</span>(<span class="params">i</span>) </span>&#123;</div><div class="line">      <span class="keyword">return</span> Back.easeOut.config(i * <span class="number">0.3</span>);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;,<span class="number">0.1</span>)</div><div class="line"></div><div class="line">tl.timeScale(<span class="number">0.5</span>);</div></pre></td></tr></table></figure>
+<p>我们在cycle中定义了一个数组赋予给X(即transform中的translateX),在实际代码运行中，stagger()会依次从数组中取值赋予给元素，不断的循环。这在执行多个对象的动画的时候非常方便。</p>
+<h2 id="链式动画"><a href="#链式动画" class="headerlink" title="链式动画"></a>链式动画</h2><p>使用过jquery都知道，jquery又一个很强大的特性即链式操作，比如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#myphoto"</span>).css(<span class="string">"border"</span>,<span class="string">"solid 2px#FF0000"</span>).attr(<span class="string">"alt"</span>,<span class="string">" good"</span>);</div></pre></td></tr></table></figure></p>
+<p>对一个jQuery对象先调用了css()函数修改样式，然后使用attr()函数修改属性，这种调用方式象链一样，所以称为”链式操作”。</p>
+<p>链式操作能够让代码变得简洁，因为往往可以在一条语句中实现以往多条语句才能完成的任务。</p>
+<p>同样在GreenSock中也支持类似jquery一样的链式动画操作，先来看实例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> tl = <span class="keyword">new</span> TimelineLite();</div><div class="line">tl.to(<span class="string">".green"</span>, <span class="number">1</span>, &#123;<span class="attr">x</span>:<span class="number">550</span>&#125;)</div><div class="line">  .to(<span class="string">".blue"</span>, <span class="number">1</span>, &#123;<span class="attr">x</span>:<span class="number">550</span>&#125;)</div><div class="line">  .to(<span class="string">".orange"</span>, <span class="number">1</span>, &#123;<span class="attr">x</span>:<span class="number">550</span>&#125;)</div></pre></td></tr></table></figure>
+<p>是不是跟jquery的链式操作很相似，所有的动画效果是一个接着一个运行的，即链式动画。</p>
+<p>GreenSock不仅提供了像这种方便的链式动画操作，而且还提供了各种动画的控制方法，比如播放、暂停等方法可以更加灵活的来对动画进行控制。</p>
+<h2 id="动画控制"><a href="#动画控制" class="headerlink" title="动画控制"></a>动画控制</h2><p>GreenSock提供了play()，pause()，resume()，reverse()，seek()，restart()， progress()，timeScale()等方法来控制动画。下面来看看这些方法都具体起到了什么作用。</p>
+<ul>
+<li><p>play()方法是开始播放动画；</p>
+</li>
+<li><p>pause()是暂停动画；</p>
+</li>
+<li><p>resume()是重新开始播放动画，是从暂停处开始播放；</p>
+</li>
+<li><p>reverse()是从相反的方向来执行动画；</p>
+</li>
+<li><p>seek()是跳转到整个动画时间的某一个时间点的时地状态，比如整个动画时间是3秒，如果调用seek(1)就表示跳转到动画在1秒这个时间点的状态；</p>
+</li>
+<li><p>progress()是指执行整个动画到某一个时间段，只接收0到1之间的数字。比如给到参数0，表示在动画开始的时候；给到参数0.5表示动画直接跳转到整个动画执行来50%的状态；1就表示动画执行完的状态；</p>
+</li>
+<li><p>restart()表示重新开始播放动画。</p>
+</li>
+</ul>
+<p>GreenSock基本的知识就介绍到这了，利用这些方法基本上可以对付开发中一些常见的动画开发，剩下的就要看你的想象力了。</p>
+<h1 id="GreenSock进阶"><a href="#GreenSock进阶" class="headerlink" title="GreenSock进阶"></a>GreenSock进阶</h1><h2 id="3D效果"><a href="#3D效果" class="headerlink" title="3D效果"></a>3D效果</h2><p>在平时的动效开发中，为了是动效具有立体的效果，一般会用到CSS3中的3D transform这一属性。在GreenSock中也提供了3D transform功能，支持CSS3D的全部属性，使用起来比CSS3更加方便。<br>开始之前首先要理解greensock中的perspective和transformPerspective两个属性。它们是greensock中运行的基础，使用它们才能使元素具有一个3D空间透视的表现能力。</p>
+<p>下面是分别使用transformPerspective和没用transformPerspective的实例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">TweenLite.set(<span class="string">".box"</span>,&#123;<span class="attr">transformPerspective</span>:<span class="number">300</span>&#125;);</div><div class="line">TweenLite.set(<span class="string">".600box"</span>,&#123;<span class="attr">transformPerspective</span>:<span class="number">500</span>&#125;);</div><div class="line"></div><div class="line"></div><div class="line">TweenLite.to(<span class="string">".box"</span>, <span class="number">3</span>, &#123;<span class="attr">rotationY</span>:<span class="number">360</span>, <span class="attr">transformOrigin</span>:<span class="string">"left top"</span>&#125;)</div><div class="line">TweenLite.to(<span class="string">".nbox"</span>, <span class="number">3</span>, &#123;<span class="attr">rotationY</span>:<span class="number">360</span>, <span class="attr">transformOrigin</span>:<span class="string">"left top"</span>&#125;)</div></pre></td></tr></table></figure>
+<p>可以明显看到，第三个元素由于没有使用perspective属性，只是一个平面的旋转效果。</p>
+<p>transformPerspective是针对单个元素使用的，而perspective则是使用在父级元素上，使用它会使改父级元素下的子元素具有3D空间透视的一个展现形式，实例如下所示：<br>可以看到，只需要在父级使用perspective的方法，可以同时使它的子元素都具有3D的展现。</p>
+<h3 id="transformOrigin"><a href="#transformOrigin" class="headerlink" title="transformOrigin"></a>transformOrigin</h3><p>transformOrigin是用来设置元素在做transform位移变换时的原点的。默认值是元素的中心点即(“50%,50%”)。transformOrigin有三个值(x,y,z)，z值是一个可选项。</p>
+<p>可以使用”top”, “left”, “right”,或者是”bottom”值亦或是百分值(比如bottom right可以设置为 “100% 100%)。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">动画</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/28/GreenSock-TweenMax极简入门指南/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CORS非简单请求" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
