@@ -147,6 +147,136 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-初探pwa（pwa学习系列）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/27/初探pwa（pwa学习系列）/">初探pwa（pwa学习系列）</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/27/初探pwa（pwa学习系列）/" class="archive-article-date">
+  	<time datetime="2018-08-27T08:10:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PWA介绍"><a href="#PWA介绍" class="headerlink" title="PWA介绍"></a><a href="https://developers.google.com/web/progressive-web-apps/" target="_blank" rel="external">PWA介绍</a></h1><p>一个新的前端技术，PWA（ 全称：Progressive Web App ）也就是说这是个渐进式的网页应用程序。</p>
+<p>是 Google 在 2015 年提出，2016年6月才推广的项目。是结合了一系列现代Web技术的组合，在网页应用中实现和原生应用相近的用户体验。</p>
+<p>官网上给出 PWA 的宣传是 ： </p>
+<ul>
+<li>Reliable （ 可靠的 ）: 当用户从手机主屏幕启动时，不用考虑网络的状态是如何，都可以立刻加载出 PWA。</li>
+<li>Fast（ 快速的 ）: 这一点应该都很熟悉了吧，站在用户的角度来考虑，如果一个网页加载速度有点长的话，那么我们会放弃浏览该网站，所以 PWA 在这一点上做的很好，他的加载速度是很快的。</li>
+<li>Engaging（ 可参与的 ）:  PWA 可以添加在用户的主屏幕上，不用从应用商店进行下载，他们通过网络应用程序 Manifest file 提供类似于 APP 的使用体验（ 在 Android 上可以设置全屏显示哦，由于 Safari 支持度的问题，所以在 IOS 上并不可以 ），并且还能进行 ”推送通知” 。</li>
+</ul>
+<h1 id="PWA关键技术"><a href="#PWA关键技术" class="headerlink" title="PWA关键技术"></a>PWA关键技术</h1><ul>
+<li>Service Worker （可以理解为服务工厂）</li>
+<li>Manifest （应用清单）</li>
+<li>Push Notification（推送通知）</li>
+</ul>
+<h2 id="Service-Worker"><a href="#Service-Worker" class="headerlink" title="Service Worker"></a><a href="https://www.villainhr.com/page/2017/01/08/Service%20Worker%20%E5%85%A8%E9%9D%A2%E8%BF%9B%E9%98%B6" target="_blank" rel="external">Service Worker</a></h2><p>SW 是什么呢？这个是离线缓存文件。我们 PWA 技术使用的就是它！SW 是浏览器在后台独立于网页运行的脚本，它打开了通向不需要网页或用户交互的功能的大门，因为使用了它，才会有的那个 Reliable 特性吧，SW 作用于 浏览器于服务器之间，相当于一个代理服务器。</p>
+<h3 id="浏览器支持"><a href="#浏览器支持" class="headerlink" title="浏览器支持"></a>浏览器支持</h3><p>顺便带一句：目前只能在 HTTPS 环境下才能使用SW，因为SW 的权利比较大，能够直接截取和返回用户的请求，所以要考虑一下安全性问题。</p>
+<p><a href="!https://segmentfault.com/img/remote/1460000014639478?w=2048&amp;h=498"></a></p>
+<h3 id="事件机制"><a href="#事件机制" class="headerlink" title="事件机制"></a>事件机制</h3><p><a href="!https://segmentfault.com/img/remote/1460000014639479?w=598&amp;h=164"></a></p>
+<h3 id="功能-还是比较逆天的"><a href="#功能-还是比较逆天的" class="headerlink" title="功能(还是比较逆天的)"></a>功能(还是比较逆天的)</h3><ul>
+<li>后台数据的同步</li>
+<li>从其他域获取资源请求</li>
+<li>接受计算密集型数据的更新，多页面共享该数据</li>
+<li>客户端编译与依赖管理</li>
+<li>后端服务的hook机制</li>
+<li>根据URL模式，自定义模板</li>
+<li>性能优化</li>
+<li>消息推送</li>
+<li>定时默认更新</li>
+<li>地理围栏</li>
+</ul>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p><a href="!https://segmentfault.com/img/remote/1460000014639480?w=772&amp;h=232"></a></p>
+<ul>
+<li>Parsed （ 解析成功 ）： 首次注册 SW 时，浏览器解决脚本并获得入口点，如果解析成功，就可以访问到 SW 注册对象，在这一点中我们需要在 HTML 页面中添加一个判断，判断该浏览器是否支持 SW </li>
+<li>Installing （ 正在安装 ）：SW 脚本解析完成之后，浏览器会尝试进行安装，installing 中 install 事件被执行，如果其中有 event.waitUntil ( ) 方法，则 installing 事件会一直等到该方法中的 Promise 完成之后才会成功，如果 Promise 被拒绝，则安装失败，SW会进入 Redundant（ 废弃 ）状态。</li>
+<li>Installed / Waiting （安装成功/等待中）：如果安装成功，SW 将会进入这个状态。</li>
+<li><p>Activating （ 正在激活 ）：处于 waiting 状态的 SW 发生以下情况，将会进入 activating 状态中：<br>当前已无激活状态的 worker 、 SW脚本中的 self.skipWaiting（）方法被调用 （ ps： self 是 SW 中作用于全局的对象，这个方法根据英文翻译过来也能明白什么意思啦，跳过等待状态 ）、用户已关闭 SW 作用域下的所有页面，从而释放了当前处于激活状态的 worker、超出指定时间，从而释放当前处于激活状态的 worker</p>
+</li>
+<li><p>Activated （ 激活成功 ）：该状态，其成功接收了 document 全面控制的激活态 worker 。</p>
+</li>
+<li><p>Redundant （ 废弃 ）：这个状态的出现时有原因的，如果 installing 事件失败或者 activating 事件失败或者新的 SW 替换其成为激活态 worker 。installing 事件失败和 activating 事件失败的信息我们可以在 Chrome 浏览器的 DevTools 中查看</p>
+</li>
+</ul>
+<h2 id="Manifest"><a href="#Manifest" class="headerlink" title="Manifest"></a>Manifest</h2><p>Web App Manifest 是一个 W3C 规范，它定义了一个基于 JSON 的 List 。Manifest 在 PWA 中的作用有：</p>
+<ul>
+<li><p>​ 能够将你浏览的网页添加到你的手机屏幕上</p>
+</li>
+<li><p>​ 在 Android 上能够全屏启动，不显示地址栏 （ 由于 Iphone 手机的浏览器是 Safari ，所以不支持哦）</p>
+</li>
+<li><p>​ 控制屏幕 横屏 / 竖屏 展示</p>
+</li>
+<li><p>定义启动画面</p>
+</li>
+<li><p>可以设置你的应用启动是从主屏幕启动还是从 URL 启动</p>
+</li>
+<li><p>可以设置你添加屏幕上的应用程序图标、名字、图标大小</p>
+</li>
+</ul>
+<h2 id="Push-Notification"><a href="#Push-Notification" class="headerlink" title="Push Notification"></a>Push Notification</h2><p>Push 和 Notification 是两个不同的功能，涉及到两个 API 。​ Notification 是浏览器发出的通知消息。Push 和 Notification 的关系，Push：服务器端将更新的信息传递给 SW ，Notification： SW 将更新的信息推送给用户。</p>
+<h2 id="PWA示例-待完善"><a href="#PWA示例-待完善" class="headerlink" title="PWA示例(待完善)"></a>PWA示例(待完善)</h2>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">pwa学习系列</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/27/初探pwa（pwa学习系列）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-h5如何更快捷稳定的导流到微信" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1358,183 +1488,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/11/28/promise入门到入门/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-前端布局中的FC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/01/前端布局中的FC/">前端布局中的FC</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/01/前端布局中的FC/" class="archive-article-date">
-  	<time datetime="2017-11-01T04:53:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="css布局中的FC"><a href="#css布局中的FC" class="headerlink" title="css布局中的FC"></a>css布局中的FC</h1><hr>
-<blockquote>
-<p>首先提出几个布局中常见的问题？？</p>
-</blockquote>
-<ul>
-<li><p>子元素浮动导致父元素高度坍陷</p>
-</li>
-<li><p>如何实现两栏自适应布局</p>
-</li>
-<li><p>如何处理相邻两个box垂直外边距重叠</p>
-</li>
-</ul>
-<p>以上问题各位是如何解决？？为什么呢？</p>
-<h3 id="1、BOX"><a href="#1、BOX" class="headerlink" title="1、BOX"></a>1、BOX</h3><p>  CSS 布局的对象和基本单位。<strong>元素的类型和display属性</strong>，决定了这个 Box 的类型。不同类型的Box内的元素会以不同的方式渲染。</p>
-<ul>
-<li>block-level box:display 属性为 block, list-item, table 的元素。</li>
-<li>inline-level box:display 属性为 inline, inline-block, inline-table 的元素。</li>
-</ul>
-<h3 id="2、什么是FC-W3C-CSS2-1-规范中的一个概念"><a href="#2、什么是FC-W3C-CSS2-1-规范中的一个概念" class="headerlink" title="2、什么是FC(W3C CSS2.1 规范中的一个概念)"></a>2、什么是FC(W3C CSS2.1 规范中的一个概念)</h3><p>Formatting context ，页面中的一块渲染区域，并且有一套<strong>渲染规则</strong>，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用。</p>
-<p><strong>CSS2.1 中只有 BFC 和 IFC, CSS3 中还增加了 GFC 和 FFC。</strong></p>
-<h3 id="3、什么是BFC？"><a href="#3、什么是BFC？" class="headerlink" title="3、什么是BFC？"></a>3、什么是BFC？</h3><p>块级格式化上下文(Block formatting context),只有普通流中的Block-level box参与的一块渲染区域，它规定了内部的Block-level Box如何布局，并且与这个区域外部毫不相干。</p>
-<p><strong>注：而float、position值不为relative\static的元素是脱离普通文档流的，不参与BFC的布局。</strong></p>
-<h4 id="3-1-布局规则"><a href="#3-1-布局规则" class="headerlink" title="3.1 布局规则"></a>3.1 布局规则</h4><ul>
-<li>内部的Box会在垂直方向，一个接一个地放置。</li>
-</ul>
-<hr>
-<ul>
-<li>Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠。</li>
-</ul>
-<blockquote>
-<p>外边距重合的问题？</p>
-</blockquote>
-<hr>
-<ul>
-<li>每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。</li>
-</ul>
-<blockquote>
-<p>元素浮动，其他元素被重叠？</p>
-</blockquote>
-<hr>
-<ul>
-<li>BFC的区域不会与float box重叠。</li>
-</ul>
-<blockquote>
-<p>清除浮动<br>两栏自适应布局，左侧浮动，右侧生成bfc</p>
-</blockquote>
-<hr>
-<ul>
-<li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。</li>
-</ul>
-<hr>
-<ul>
-<li>计算BFC的高度时，浮动元素也参与计算。<blockquote>
-<p>清除浮动<br>子元素浮动父元素高度坍陷？</p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<h4 id="3-1-这么厉害？怎么样才能成为BFC呢"><a href="#3-1-这么厉害？怎么样才能成为BFC呢" class="headerlink" title="3.1 这么厉害？怎么样才能成为BFC呢"></a>3.1 这么厉害？怎么样才能成为BFC呢</h4><ul>
-<li>根元素</li>
-<li>float不为none</li>
-<li>position不为relative和static</li>
-<li>display:inline-block, table-cell, table-caption, flex, inline-flex</li>
-<li>overflow不为visible</li>
-</ul>
-<h4 id="3-2举个栗子解读BFC"><a href="#3-2举个栗子解读BFC" class="headerlink" title="3.2举个栗子解读BFC"></a>3.2举个栗子解读BFC</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">    body &#123;</div><div class="line">        width: 300px;</div><div class="line">        position: relative;</div><div class="line">    &#125;</div><div class="line">    .aside &#123;</div><div class="line">        width: 100px;</div><div class="line">        height: 150px;</div><div class="line">        float: left;</div><div class="line">        background: #f66;</div><div class="line">    &#125;</div><div class="line">    .main &#123;</div><div class="line">        height: 200px;</div><div class="line">        background: #fcc;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;div class=&quot;aside&quot;&gt;&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;main&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
-<p><img src="https://mabiao8023.github.io/web-flex/float1.png" alt="image"></p>
-<p><strong>根据BFC布局规则</strong></p>
-<blockquote>
-<p>每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。</p>
-</blockquote>
-<p><strong>怎么实现左边固定右边自适应?</strong></p>
-<p><strong>根据BFC布局规则</strong></p>
-<blockquote>
-<p>BFC的区域不会与float box重叠。<br>让ian生成BFC？</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.main &#123;</div><div class="line">    overflow: hidden;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><img src="https://mabiao8023.github.io/web-flex/float2.png" alt="image"></p>
-<hr>
-<p><strong>如何选取方式生成BFC？</strong><br><strong>各生成BFC方式的总结</strong></p>
-<ul>
-<li>float:left 然而浮动元素有破坏性和包裹性，失去了元素本身的流体自适应性，因此，无法用来实现自动填满容器的自适应布局。</li>
-<li>position:absolute 这个脱离文档流有些严重，我就不说什么了……关于定位又是一个比较复杂的布局方式</li>
-<li>overflow:hidden 这个超棒的哦！不像浮动和绝对定位。也就是溢出剪裁什么的，本身还是个很普通的元素。</li>
-<li>display:inline-block 会让元素尺寸包裹收缩，完全就不是我们想要的block水平的流动特性。</li>
-<li>display:table-cell 让元素表现得像单元格一样，尺寸包裹收缩。</li>
-</ul>
-<p><strong>自适应两栏布局有很多的其他方法</strong></p>
-<h3 id="4、IFC"><a href="#4、IFC" class="headerlink" title="4、IFC"></a>4、IFC</h3><p><strong>内联格式化上下文</strong></p>
-<ul>
-<li>1.IFC中的line box一般左右都贴紧整个IFC，但是会因为float元素而扰乱。float元素会位于IFC与与line box之间，使得line box宽度缩短。 </li>
-<li>2.水平居中：当一个块要在水平居中时，设置为inline-block则会在外层产生IFC，通过text-align可以水平居中。</li>
-<li>3.垂直居中：创建一个IFC，用其中一个元素撑开父元素的高度，然后设置其vertical-align:middle，其他行内元素则可以在此父元素下垂直居中。</li>
-</ul>
-<h3 id="5、FFC"><a href="#5、FFC" class="headerlink" title="5、FFC"></a>5、FFC</h3><p>(Flex Formatting Contexts)为”自适应格式化上下文”，</p>
-<ul>
-<li><p>display值为flex或者inline-flex的元素将生成ffc</p>
-</li>
-<li><p>display: flex 或 inline-flex得到一个伸缩容器。Flexbox 定义了伸缩容器内伸缩项目该如何布局。</p>
-</li>
-</ul>
-<p><strong>不定宽高的垂直水平居中方法</strong><br>方法1：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.parent&#123;</div><div class="line">position:relative;</div><div class="line">&#125;</div><div class="line">.content&#123;</div><div class="line">position:absoulte;</div><div class="line">top:50%;</div><div class="line">left:50%;</div><div class="line">transform:translate(-50%,-50%);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>方法2：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.parent&#123;</div><div class="line">justify-content:center; //子元素水平居中</div><div class="line">align-items:center;     //子元素垂直居中</div><div class="line">display:-webkit-flex;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><a href="https://mabiao8023.github.io/web-flex/" target="_blank" rel="external">点我了解FFC牛逼的地方</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css,FC,BFC,IFC,FFC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/01/前端布局中的FC/">展开全文 >></a>
         </p>
       
 

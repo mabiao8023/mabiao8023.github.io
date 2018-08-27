@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Microbot Team - mbiao</title>
+  <title>初探pwa（pwa学习系列） | Microbot Team - mbiao</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Microbot Team - mbiao">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+  <meta name="description" content="PWA介绍一个新的前端技术，PWA（ 全称：Progressive Web App ）也就是说这是个渐进式的网页应用程序。 是 Google 在 2015 年提出，2016年6月才推广的项目。是结合了一系列现代Web技术的组合，在网页应用中实现和原生应用相近的用户体验。 官网上给出 PWA 的宣传是 ：   Reliable （ 可靠的 ）: 当用户从手机主屏幕启动时，不用考虑网络的状态是如何，都">
+<meta name="keywords" content="pwa学习系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探pwa（pwa学习系列）">
+<meta property="og:url" content="http://yoursite.com/2018/08/27/初探pwa（pwa学习系列）/index.html">
 <meta property="og:site_name" content="Microbot Team - mbiao">
+<meta property="og:description" content="PWA介绍一个新的前端技术，PWA（ 全称：Progressive Web App ）也就是说这是个渐进式的网页应用程序。 是 Google 在 2015 年提出，2016年6月才推广的项目。是结合了一系列现代Web技术的组合，在网页应用中实现和原生应用相近的用户体验。 官网上给出 PWA 的宣传是 ：   Reliable （ 可靠的 ）: 当用户从手机主屏幕启动时，不用考虑网络的状态是如何，都">
+<meta property="og:updated_time" content="2018-08-27T08:34:38.554Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Microbot Team - mbiao">
+<meta name="twitter:title" content="初探pwa（pwa学习系列）">
+<meta name="twitter:description" content="PWA介绍一个新的前端技术，PWA（ 全称：Progressive Web App ）也就是说这是个渐进式的网页应用程序。 是 Google 在 2015 年提出，2016年6月才推广的项目。是结合了一系列现代Web技术的组合，在网页应用中实现和原生应用相近的用户体验。 官网上给出 PWA 的宣传是 ：   Reliable （ 可靠的 ）: 当用户从手机主屏幕启动时，不用考虑网络的状态是如何，都">
   
     <link rel="alternative" href="/atom.xml" title="Microbot Team - mbiao" type="application/atom+xml">
   
@@ -145,90 +150,214 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-初探pwa（pwa学习系列）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/01/前端布局中的FC/" class="archive-article-date">
-  	<time datetime="2017-11-01T04:53:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-01</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/01/前端布局中的FC/">前端布局中的FC</a>
+    <h1 class="article-title" itemprop="name">
+      初探pwa（pwa学习系列）
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/08/27/初探pwa（pwa学习系列）/" class="archive-article-date">
+  	<time datetime="2018-08-27T08:10:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PWA介绍"><a href="#PWA介绍" class="headerlink" title="PWA介绍"></a><a href="https://developers.google.com/web/progressive-web-apps/" target="_blank" rel="external">PWA介绍</a></h1><p>一个新的前端技术，PWA（ 全称：Progressive Web App ）也就是说这是个渐进式的网页应用程序。</p>
+<p>是 Google 在 2015 年提出，2016年6月才推广的项目。是结合了一系列现代Web技术的组合，在网页应用中实现和原生应用相近的用户体验。</p>
+<p>官网上给出 PWA 的宣传是 ： </p>
+<ul>
+<li>Reliable （ 可靠的 ）: 当用户从手机主屏幕启动时，不用考虑网络的状态是如何，都可以立刻加载出 PWA。</li>
+<li>Fast（ 快速的 ）: 这一点应该都很熟悉了吧，站在用户的角度来考虑，如果一个网页加载速度有点长的话，那么我们会放弃浏览该网站，所以 PWA 在这一点上做的很好，他的加载速度是很快的。</li>
+<li>Engaging（ 可参与的 ）:  PWA 可以添加在用户的主屏幕上，不用从应用商店进行下载，他们通过网络应用程序 Manifest file 提供类似于 APP 的使用体验（ 在 Android 上可以设置全屏显示哦，由于 Safari 支持度的问题，所以在 IOS 上并不可以 ），并且还能进行 ”推送通知” 。</li>
+</ul>
+<h1 id="PWA关键技术"><a href="#PWA关键技术" class="headerlink" title="PWA关键技术"></a>PWA关键技术</h1><ul>
+<li>Service Worker （可以理解为服务工厂）</li>
+<li>Manifest （应用清单）</li>
+<li>Push Notification（推送通知）</li>
+</ul>
+<h2 id="Service-Worker"><a href="#Service-Worker" class="headerlink" title="Service Worker"></a><a href="https://www.villainhr.com/page/2017/01/08/Service%20Worker%20%E5%85%A8%E9%9D%A2%E8%BF%9B%E9%98%B6" target="_blank" rel="external">Service Worker</a></h2><p>SW 是什么呢？这个是离线缓存文件。我们 PWA 技术使用的就是它！SW 是浏览器在后台独立于网页运行的脚本，它打开了通向不需要网页或用户交互的功能的大门，因为使用了它，才会有的那个 Reliable 特性吧，SW 作用于 浏览器于服务器之间，相当于一个代理服务器。</p>
+<h3 id="浏览器支持"><a href="#浏览器支持" class="headerlink" title="浏览器支持"></a>浏览器支持</h3><p>顺便带一句：目前只能在 HTTPS 环境下才能使用SW，因为SW 的权利比较大，能够直接截取和返回用户的请求，所以要考虑一下安全性问题。</p>
+<p><a href="!https://segmentfault.com/img/remote/1460000014639478?w=2048&amp;h=498"></a></p>
+<h3 id="事件机制"><a href="#事件机制" class="headerlink" title="事件机制"></a>事件机制</h3><p><a href="!https://segmentfault.com/img/remote/1460000014639479?w=598&amp;h=164"></a></p>
+<h3 id="功能-还是比较逆天的"><a href="#功能-还是比较逆天的" class="headerlink" title="功能(还是比较逆天的)"></a>功能(还是比较逆天的)</h3><ul>
+<li>后台数据的同步</li>
+<li>从其他域获取资源请求</li>
+<li>接受计算密集型数据的更新，多页面共享该数据</li>
+<li>客户端编译与依赖管理</li>
+<li>后端服务的hook机制</li>
+<li>根据URL模式，自定义模板</li>
+<li>性能优化</li>
+<li>消息推送</li>
+<li>定时默认更新</li>
+<li>地理围栏</li>
+</ul>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p><a href="!https://segmentfault.com/img/remote/1460000014639480?w=772&amp;h=232"></a></p>
+<ul>
+<li>Parsed （ 解析成功 ）： 首次注册 SW 时，浏览器解决脚本并获得入口点，如果解析成功，就可以访问到 SW 注册对象，在这一点中我们需要在 HTML 页面中添加一个判断，判断该浏览器是否支持 SW </li>
+<li>Installing （ 正在安装 ）：SW 脚本解析完成之后，浏览器会尝试进行安装，installing 中 install 事件被执行，如果其中有 event.waitUntil ( ) 方法，则 installing 事件会一直等到该方法中的 Promise 完成之后才会成功，如果 Promise 被拒绝，则安装失败，SW会进入 Redundant（ 废弃 ）状态。</li>
+<li>Installed / Waiting （安装成功/等待中）：如果安装成功，SW 将会进入这个状态。</li>
+<li><p>Activating （ 正在激活 ）：处于 waiting 状态的 SW 发生以下情况，将会进入 activating 状态中：<br>当前已无激活状态的 worker 、 SW脚本中的 self.skipWaiting（）方法被调用 （ ps： self 是 SW 中作用于全局的对象，这个方法根据英文翻译过来也能明白什么意思啦，跳过等待状态 ）、用户已关闭 SW 作用域下的所有页面，从而释放了当前处于激活状态的 worker、超出指定时间，从而释放当前处于激活状态的 worker</p>
+</li>
+<li><p>Activated （ 激活成功 ）：该状态，其成功接收了 document 全面控制的激活态 worker 。</p>
+</li>
+<li><p>Redundant （ 废弃 ）：这个状态的出现时有原因的，如果 installing 事件失败或者 activating 事件失败或者新的 SW 替换其成为激活态 worker 。installing 事件失败和 activating 事件失败的信息我们可以在 Chrome 浏览器的 DevTools 中查看</p>
+</li>
+</ul>
+<h2 id="Manifest"><a href="#Manifest" class="headerlink" title="Manifest"></a>Manifest</h2><p>Web App Manifest 是一个 W3C 规范，它定义了一个基于 JSON 的 List 。Manifest 在 PWA 中的作用有：</p>
+<ul>
+<li><p>​ 能够将你浏览的网页添加到你的手机屏幕上</p>
+</li>
+<li><p>​ 在 Android 上能够全屏启动，不显示地址栏 （ 由于 Iphone 手机的浏览器是 Safari ，所以不支持哦）</p>
+</li>
+<li><p>​ 控制屏幕 横屏 / 竖屏 展示</p>
+</li>
+<li><p>定义启动画面</p>
+</li>
+<li><p>可以设置你的应用启动是从主屏幕启动还是从 URL 启动</p>
+</li>
+<li><p>可以设置你添加屏幕上的应用程序图标、名字、图标大小</p>
+</li>
+</ul>
+<h2 id="Push-Notification"><a href="#Push-Notification" class="headerlink" title="Push Notification"></a>Push Notification</h2><p>Push 和 Notification 是两个不同的功能，涉及到两个 API 。​ Notification 是浏览器发出的通知消息。Push 和 Notification 的关系，Push：服务器端将更新的信息传递给 SW ，Notification： SW 将更新的信息推送给用户。</p>
+<h2 id="PWA示例-待完善"><a href="#PWA示例-待完善" class="headerlink" title="PWA示例(待完善)"></a>PWA示例(待完善)</h2>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css,FC,BFC,IFC,FFC</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">pwa学习系列</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/08/27/初探pwa（pwa学习系列）/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/24/my-new-post/" class="archive-article-date">
-  	<time datetime="2017-10-24T02:23:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/07/h5如何更快捷稳定的导流到微信/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">h5如何更快捷稳定的导流到微信</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/24/my-new-post/">my new post</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PWA介绍"><span class="toc-number">1.</span> <span class="toc-text">PWA介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PWA关键技术"><span class="toc-number">2.</span> <span class="toc-text">PWA关键技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Service-Worker"><span class="toc-number">2.1.</span> <span class="toc-text">Service Worker</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#浏览器支持"><span class="toc-number">2.1.1.</span> <span class="toc-text">浏览器支持</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件机制"><span class="toc-number">2.1.2.</span> <span class="toc-text">事件机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#功能-还是比较逆天的"><span class="toc-number">2.1.3.</span> <span class="toc-text">功能(还是比较逆天的)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生命周期"><span class="toc-number">2.1.4.</span> <span class="toc-text">生命周期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Manifest"><span class="toc-number">2.2.</span> <span class="toc-text">Manifest</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Push-Notification"><span class="toc-number">2.3.</span> <span class="toc-text">Push Notification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PWA示例-待完善"><span class="toc-number">2.4.</span> <span class="toc-text">PWA示例(待完善)</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
   
 
 
@@ -252,8 +381,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
